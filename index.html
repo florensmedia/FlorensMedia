@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Florens Media — Independent Media Strategy &amp; Intelligence</title>
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta content="Independent media strategy, research, intelligence, audit and dashboards for better decisions." name="description"/>
+<style>
+:root{
+  --ink:#141414;
+  --paper:#f5f2eb;
+  --paper-2:#ebe6dc;
+  --muted:#77756f;
+  --line:rgba(20,20,20,.18);
+  --accent:#8f4f39;
+  --contact:#304943;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--paper);
+  font-family:Inter, Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img,video{display:block;max-width:100%}
+::selection{background:var(--ink);color:var(--paper)}
+
+.site-header{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:50;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 34px;
+  color:var(--white);
+  background:rgba(17,17,17,.72);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  backdrop-filter:blur(14px) saturate(120%);
+}
+.wordmark{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:18px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.nav a{opacity:.86;transition:.2s}
+.nav a:hover{opacity:1}
+
+.lang-toggle{
+  border:1px solid currentColor;
+  background:transparent;
+  color:inherit;
+  border-radius:999px;
+  padding:7px 10px;
+  cursor:pointer;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.78;
+}
+.lang-toggle:hover{opacity:1}
+
+.hero{
+  position:relative;
+  min-height:100svh;
+  overflow:hidden;
+  background:#2b2c31;
+  color:#fff;
+}
+.hero video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  filter:grayscale(1) contrast(1.08) brightness(.82);
+  transform:translateX(14vw) scale(1.08);
+  transition:opacity 1.25s ease;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.68) 0%,rgba(0,0,0,.38) 42%,rgba(0,0,0,.08) 68%,transparent 82%),
+    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.35));
+  transition:opacity 1.2s ease;
+}
+.hero-fade{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:#2b2c31;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.25s ease;
+}
+
+.sound-toggle{
+  position:absolute;
+  z-index:4;
+  right:6vw;
+  bottom:118px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(255,255,255,.48);
+  border-radius:999px;
+  padding:9px 13px 9px 10px;
+  background:rgba(20,21,23,.28);
+  color:#fff;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  cursor:pointer;
+  font:inherit;
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:opacity .25s ease,background .25s ease,border-color .25s ease;
+}
+.sound-toggle:hover{
+  background:rgba(20,21,23,.48);
+  border-color:rgba(255,255,255,.8);
+}
+.sound-toggle[aria-pressed="true"]{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.82);
+}
+.sound-icon{
+  position:relative;
+  width:18px;
+  height:18px;
+  display:grid;
+  place-items:center;
+}
+.sound-icon svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.sound-toggle .sound-off-line{
+  opacity:1;
+  transition:opacity .2s ease;
+}
+.sound-toggle[aria-pressed="true"] .sound-off-line{opacity:0}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  min-height:100svh;
+  padding:110px 6vw 54px;
+  display:grid;
+  align-content:end;
+}
+.hero-kicker{
+  margin-bottom:22px;
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  opacity:.76;
+}
+.hero h1{
+  margin:0;
+  max-width:760px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(56px,7.5vw,122px);
+  line-height:.83;
+  font-weight:400;
+  letter-spacing:-.055em;
+}
+.hero-bottom{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:40px;
+  margin-top:34px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.3);
+}
+.hero-bottom p{
+  margin:0;
+  max-width:520px;
+  font-size:17px;
+  line-height:1.55;
+  opacity:.86;
+}
+.scroll{
+  justify-self:end;
+  align-self:end;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+.scroll::before{content:"";width:54px;height:1px;background:#fff}
+.hero-bottom .hero-lead{max-width:600px}
+.hero-actions{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero-cta{display:inline-flex;padding:15px 26px;border:1px solid #fff;border-radius:999px;background:#fff;color:#141414;font-size:11px;letter-spacing:.16em;text-transform:uppercase;transition:.25s}
+.hero-cta:hover{background:transparent;color:#fff}
+
+.marquee{
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.marquee-track{
+  width:max-content;
+  display:flex;
+  gap:55px;
+  padding:18px 0;
+  animation:marquee 30s linear infinite;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+}
+.marquee-track span::after{
+  content:"✳";
+  margin-left:55px;
+  color:var(--accent);
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.section{
+  position:relative;
+  padding:130px 6vw;
+  border-bottom:1px solid var(--line);
+}
+.section-grid{
+  display:grid;
+  grid-template-columns:minmax(160px,.65fr) 1.7fr;
+  gap:8vw;
+}
+.label{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#5e5b54;
+}
+.display{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(46px,6vw,92px);
+  line-height:.96;
+  letter-spacing:-.045em;
+  font-weight:400;
+}
+.intro{
+  margin:32px 0 0;
+  max-width:760px;
+  font-size:clamp(19px,2vw,28px);
+  line-height:1.45;
+  color:#464541;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  margin-top:70px;
+}
+.service{
+  min-height:285px;
+  padding:26px 28px 34px 0;
+  border-top:1px solid var(--ink);
+  display:grid;
+  grid-template-rows:24px minmax(106px,auto) 1fr;
+  align-content:start;
+}
+.service:nth-child(odd){margin-right:30px}
+.service:nth-child(even){padding-left:30px}
+.service h3{
+  margin:0;
+  min-height:3.15em;
+  align-self:start;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(30px,3vw,48px);
+  line-height:1.05;
+  font-weight:400;
+}
+.service p{
+  margin:18px 0 0;
+  max-width:430px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.service .num{
+  font-size:11px;
+  letter-spacing:.15em;
+  color:var(--accent);
+}
+
+.dark{
+  background:var(--ink);
+  color:var(--paper);
+}
+.dark .label,.dark .intro{color:#c8c4bb}
+.signal{
+  margin-top:70px;
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:25px;
+}
+.signal-stage{
+  min-height:520px;
+  position:relative;
+  overflow:hidden;
+  background:#0c0c0c;
+  border:1px solid rgba(255,255,255,.16);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:30px;
+  padding:40px;
+}
+.signal-stage::before,
+.signal-stage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+}
+.signal-stage::before{
+  background:
+    repeating-linear-gradient(90deg,transparent 0 74px,rgba(255,255,255,.07) 75px),
+    repeating-linear-gradient(0deg,transparent 0 74px,rgba(255,255,255,.07) 75px);
+}
+.demo-head{position:relative;z-index:1}
+.demo-tag{
+  display:inline-block;
+  margin-bottom:16px;
+  padding:6px 12px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#f0c9a8;
+}
+.demo-title{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(22px,2.6vw,30px);
+  font-weight:400;
+  color:#fff;
+}
+.demo-note{
+  margin:8px 0 0;
+  font-size:12px;
+  color:#948f86;
+}
+.chart-bars{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.bar-row{
+  display:grid;
+  grid-template-columns:84px 1fr 46px;
+  align-items:center;
+  gap:14px;
+  font-size:12px;
+  color:#d8d4cb;
+}
+.bar-track{
+  height:9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#8f4f39,#e8b08c);
+}
+.bar-row span:last-child{text-align:right;color:#fff}
+.demo-cta{
+  position:relative;
+  z-index:1;
+  align-self:flex-start;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+  padding:12px 18px;
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:999px;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#fff;
+  transition:.25s;
+}
+.demo-cta:hover{background:#fff;color:var(--ink);border-color:#fff}
+.demo-ctas{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}
+.demo-ctas .demo-cta{margin-top:0}
+.demo-ctas{gap:26px}
+.demo-item{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.demo-cap{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#c8c4bb}
+.signal-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:34px;
+  border:1px solid rgba(255,255,255,.16);
+}
+.metric{
+  padding:20px 0;
+  border-top:1px solid rgba(255,255,255,.2);
+}
+.metric strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  font-weight:400;
+}
+.metric span{
+  font-size:12px;
+  color:#aaa79f;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+
+.process{
+  margin-top:70px;
+  display:grid;
+  gap:0;
+}
+.step{
+  display:grid;
+  grid-template-columns:90px 1fr minmax(220px,.55fr);
+  gap:24px;
+  align-items:center;
+  padding:27px 0;
+  border-top:1px solid var(--line);
+}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{color:var(--accent);font-size:11px;letter-spacing:.16em}
+.start-cta{display:inline-flex;margin-top:40px;padding:15px 26px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper);font-size:11px;letter-spacing:.16em;text-transform:uppercase;transition:.25s}
+.start-cta:hover{background:transparent;color:var(--ink)}
+.step h3{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(28px,3vw,48px);
+  font-weight:400;
+}
+.step p{margin:0;color:var(--muted);line-height:1.5}
+
+.experience{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin-top:70px;
+  border-top:1px solid var(--ink);
+}
+.exp{
+  min-height:260px;
+  padding:24px 24px 24px 0;
+  border-right:1px solid var(--line);
+}
+.exp:not(:first-child){padding-left:24px}
+.exp:last-child{border-right:0}
+.exp h3{
+  margin:0 0 34px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:32px;
+  font-weight:400;
+}
+.exp p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+
+.insights{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:70px;
+}
+.insight{
+  min-height:0;
+  padding:22px 0 0;
+  border:0;
+  border-top:1px solid var(--ink);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  transition:.25s ease;
+}
+
+.insight .tag{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--accent);
+}
+.insight h3{
+  margin:18px 0 16px;
+  min-height:4.2em;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:34px;
+  line-height:1.05;
+  font-weight:400;
+}
+.insight p{margin:0;color:var(--muted);line-height:1.5}
+
+
+.about-wrap{
+  display:grid;
+  grid-template-columns:minmax(300px,.82fr) 1.18fr;
+  gap:7vw;
+  align-items:start;
+}
+.about-left{
+  display:flex;
+  flex-direction:column;
+  gap:96px;
+}
+.about-portrait{
+  margin:0;
+  position:relative;
+  overflow:hidden;
+  min-height:680px;
+  background:#252725;
+}
+.about-portrait img{
+  width:100%;
+  height:100%;
+  min-height:680px;
+  object-fit:cover;
+  object-position:center 34%;
+  filter:grayscale(1) contrast(1.04);
+}
+.about-portrait::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+  pointer-events:none;
+}
+.about-copy .display{
+  max-width:760px;
+}
+.about-quote{
+  margin:34px 0 28px;
+  max-width:820px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(27px,3vw,44px);
+  line-height:1.16;
+  letter-spacing:-.025em;
+}
+.about-body{
+  max-width:760px;
+  font-size:17px;
+  line-height:1.72;
+  color:#4d4b46;
+}
+.about-body p{margin:0 0 18px}
+.about-facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:34px;
+}
+.about-facts span{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+@media(max-width:900px){
+  .sound-toggle{right:6vw;bottom:142px}
+  .about-wrap{grid-template-columns:1fr;gap:44px}
+  .about-left{gap:36px}
+  .about-portrait,.about-portrait img{min-height:520px}
+}
+
+.contact{
+  min-height:85svh;
+  display:grid;
+  place-items:center;
+  padding:100px 6vw;
+  text-align:center;
+  background:var(--contact);
+  color:#fff;
+}
+.contact h2{
+  max-width:1000px;
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(52px,8vw,128px);
+  line-height:.88;
+  letter-spacing:-.05em;
+  font-weight:400;
+}
+.contact p{
+  max-width:580px;
+  margin:32px auto 0;
+  font-size:18px;
+  line-height:1.55;
+}
+.contact a{
+  display:inline-flex;
+  margin-top:36px;
+  padding:15px 24px;
+  border:1px solid #fff;
+  border-radius:999px;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  transition:.25s;
+}
+.contact a:hover{background:#fff;color:var(--contact)}
+.contact{text-align:left;place-items:initial;align-content:center}
+.contact-wrap{width:100%;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:start}
+.contact .contact-intro h2{font-size:clamp(44px,5.4vw,84px);max-width:none}
+.contact .contact-intro p{margin:28px 0 0;max-width:480px}
+.contact-links{display:grid;gap:0;margin-top:44px;border-top:1px solid rgba(255,255,255,.3)}
+.contact .contact-links a{display:flex;flex-direction:column;gap:6px;margin:0;padding:20px 0;border:0;border-bottom:1px solid rgba(255,255,255,.3);border-radius:0;text-transform:none;letter-spacing:0;font-size:inherit}
+.contact .contact-links a:hover{background:none;color:#fff}
+.contact-links small{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.contact-links strong{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(24px,2.4vw,34px);transition:transform .25s}
+.contact .contact-links a:hover strong{transform:translateX(6px)}
+.contact-form{margin:0;text-align:left;padding-top:8px}
+@media(max-width:900px){.contact-wrap{grid-template-columns:1fr;gap:56px}}
+.contact-form .hp{display:none}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
+.cf-field{display:flex;flex-direction:column;gap:8px}
+.cf-field span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+.cf-wide{grid-column:1/-1}
+.cf-field input,.cf-field select,.cf-field textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.45);
+  color:#fff;font:inherit;font-size:16px;padding:8px 0;border-radius:0;outline:none;resize:vertical}
+.cf-field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);
+  background-position:calc(100% - 12px) 55%,calc(100% - 7px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.cf-field select option{color:var(--ink)}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-bottom-color:#fff}
+.cf-field input.invalid,.cf-field textarea.invalid{border-bottom-color:#f0b9a4}
+.cf-consent{display:flex;gap:10px;align-items:flex-start;margin-top:26px;font-size:13px;opacity:.9;cursor:pointer}
+.cf-consent input{margin:2px 0 0;width:16px;height:16px;accent-color:#fff;flex:0 0 auto}
+.cf-consent.invalid{color:#f0b9a4}
+.contact .cf-consent a{display:inline;margin:0;padding:0;border:0;border-radius:0;font-size:inherit;text-transform:none;letter-spacing:0;text-decoration:underline;text-underline-offset:3px}
+.contact .cf-consent a:hover{background:none;color:#fff}
+.cf-submit{display:inline-flex;margin-top:24px;padding:15px 24px;border:1px solid #fff;border-radius:999px;background:transparent;color:#fff;
+  font-size:11px;text-transform:uppercase;letter-spacing:.16em;cursor:pointer;transition:.25s}
+.cf-submit:hover{background:#fff;color:var(--contact)}
+.cf-submit[disabled]{opacity:.6;cursor:wait}
+.cf-status{margin:16px 0 0!important;font-size:15px!important;min-height:1.4em}
+.contact .cf-alt{margin-top:26px;font-size:14px;opacity:.8}
+.contact .cf-phone{margin:28px auto 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap}
+.contact .cf-phone span{opacity:.75}
+.contact .cf-phone a{display:inline;margin:0;padding:0;border:0;border-radius:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(28px,3.4vw,40px);letter-spacing:.01em;text-transform:none}
+.contact .cf-phone a:hover{background:none;color:#fff;text-decoration:underline;text-underline-offset:6px}
+.contact a.cf-mail{display:inline;margin:0;padding:0;border:0;border-radius:0;font-size:inherit;text-transform:none;letter-spacing:0;border-bottom:1px solid rgba(255,255,255,.5)}
+.contact a.cf-mail:hover{background:none;color:#fff;border-bottom-color:#fff}
+@media(max-width:700px){.cf-grid{grid-template-columns:1fr}}
+
+footer{
+  gap:14px 30px;flex-wrap:wrap;
+  display:flex;
+  justify-content:space-between;
+  padding:24px 6vw 30px;
+  background:var(--ink);
+  color:#9d9a93;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero video{object-position:54% center;transform:translateX(24vw) scale(1.16)}
+  .site-header{padding:18px 20px}
+  .nav a:not(:last-child){display:none}
+  .hero-inner{padding:100px 20px 34px}
+  .hero-bottom{grid-template-columns:1fr}
+  .scroll{justify-self:start}
+  .section{padding:90px 20px}
+  .section-grid{grid-template-columns:1fr;gap:30px}
+  .services,.signal,.experience,.insights{grid-template-columns:1fr}
+  .service:nth-child(odd){margin-right:0}
+  .service:nth-child(even){padding-left:0}
+  .service h3{min-height:0}
+  .insight h3{min-height:0}
+  .signal-stage{min-height:360px}
+  .step{grid-template-columns:48px 1fr}
+  .step p{grid-column:2}
+  .exp{border-right:0;border-bottom:1px solid var(--line);padding:24px 0!important}
+  footer{flex-direction:column;gap:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+<a class="wordmark" href="#top">Florens Media</a>
+<nav class="nav">
+<a data-en="Services" data-ro="Servicii" href="#services">Services</a>
+<a data-en="Analysis" data-ro="Analiză" href="#intelligence">Intelligence</a>
+<a data-en="Approach" data-ro="Abordare" href="#approach">Approach</a>
+<a data-en="About" data-ro="Despre mine" href="#about">About</a>
+<a data-en="Contact" data-ro="Contact" href="#contact">Contact</a>
+<button aria-label="Change language" class="lang-toggle" type="button">RO</button>
+</nav>
+</header>
+<section class="hero" id="top">
+<video id="heroVideo" autoplay muted playsinline preload="auto">
+<source src="florens-home-flower.mp4" type="video/mp4"/>
+</video>
+<div aria-hidden="true" class="hero-fade"></div>
+
+<button class="sound-toggle" type="button" aria-label="Turn sound on" aria-pressed="false">
+  <span class="sound-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 10v4h4l5 4V6l-5 4H4Z"></path>
+      <path d="M16 9.5c1.2 1.3 1.2 3.7 0 5"></path>
+      <path class="sound-off-line" d="M18.5 7.5 22 16.5"></path>
+    </svg>
+  </span>
+  <span class="sound-label">Sound on</span>
+</button>
+
+<div class="hero-inner">
+<div class="hero-kicker" data-en="20+ years of experience in offline media" data-ro="20+ ani de experiență în media offline">20+ years of experience in offline media</div>
+<h1 data-en="Better‑informed media decisions." data-ro="Decizii media mai bine fundamentate.">Better‑informed media decisions.</h1>
+<div class="hero-bottom">
+<p class="hero-lead" data-en="Independent media consultancy for companies that invest in advertising. I don't sell media and have no inventory to fill — I work only towards your objectives." data-ro="Consultanță media independentă pentru companiile care investesc în publicitate. Nu vând media și nu am inventar de ocupat — lucrez doar pentru obiectivele tale.">Independent media consultancy for companies that invest in advertising. I don't sell media and have no inventory to fill — I work only towards your objectives.</p>
+<div class="hero-actions">
+<a class="hero-cta" href="#contact" data-en="Let's talk" data-ro="Hai să discutăm">Let's talk</a>
+<div class="scroll" data-en="Explore" data-ro="Explorează">Explore</div>
+</div>
+</div>
+</div>
+</section>
+<div class="marquee">
+<div class="marquee-track">
+<span data-en="Media strategy" data-ro="Strategie media">Media strategy</span><span data-en="Audience intelligence" data-ro="Analiza audienței">Audience intelligence</span><span data-en="Competitive analysis" data-ro="Analiză competitivă">Competitive analysis</span><span data-en="Campaign evaluation" data-ro="Evaluarea campaniilor">Campaign evaluation</span><span data-en="Dashboards" data-ro="Dashboarduri">Dashboards</span><span data-en="Agency advisory" data-ro="Consultanță pentru relația cu agenția">Agency advisory</span>
+<span data-en="Media strategy" data-ro="Strategie media">Media strategy</span><span data-en="Audience intelligence" data-ro="Analiza audienței">Audience intelligence</span><span data-en="Competitive analysis" data-ro="Analiză competitivă">Competitive analysis</span><span data-en="Campaign evaluation" data-ro="Evaluarea campaniilor">Campaign evaluation</span><span data-en="Dashboards" data-ro="Dashboarduri">Dashboards</span><span data-en="Agency advisory" data-ro="Consultanță pentru relația cu agenția">Agency advisory</span>
+</div>
+</div>
+<section class="section" id="services">
+<div class="section-grid reveal">
+<div class="label" data-en="01 · How I can help" data-ro="01 · Cum te pot ajuta">01 · How I can help</div>
+<div>
+<h2 class="display" data-en="Independent consultancy for your media decisions." data-ro="Consultanță independentă pentru deciziile tale media.">Independent consultancy for your media decisions.</h2>
+<p class="intro" data-en="From the first questions to the final results, I can support a single project or work alongside your team over the longer term." data-ro="De la primele întrebări până la evaluarea rezultatelor, pot interveni punctual sau pot lucra alături de echipa ta pe termen mai lung.">From the first questions to the final results, I can support a single project or work alongside your team over the longer term.</p>
+<div class="services">
+<article class="service">
+<span class="num">01</span>
+<div><h3 data-en="Is your media budget being used as effectively as it could be?" data-ro="Bugetul de media este folosit cât mai bine?">Is your media budget being used as effectively as it could be?</h3><p data-en="I review the strategy, channel mix and budget allocation to identify what can be improved. You get an independent view of your media decisions, whether you work with an agency or run campaigns in-house." data-ro="Analizez strategia, mixul de canale și distribuția investiției pentru a identifica ce poate fi îmbunătățit. Primești o perspectivă independentă asupra deciziilor media, indiferent dacă lucrezi cu o agenție sau gestionezi campaniile intern.">I review the strategy, channel mix and budget allocation to identify what can be improved. You get an independent view of your media decisions, whether you work with an agency or run campaigns in-house.</p></div>
+</article>
+<article class="service">
+<span class="num">02</span>
+<div><h3 data-en="Not sure which communication direction to take?" data-ro="Trebuie să alegi o direcție de comunicare?">Not sure which communication direction to take?</h3><p data-en="I use category, consumer, audience and competitive data to define the target audience, the channels that fit and the level of media pressure needed. This analysis becomes the basis for the brief and the media plan." data-ro="Pornesc de la date despre categorie, consumatori, audiențe și competiție pentru a defini targetul, canalele potrivite și nivelul de presiune media. Analiza oferă baza pentru brief și planificare.">I use category, consumer, audience and competitive data to define the target audience, the channels that fit and the level of media pressure needed. This analysis becomes the basis for the brief and the media plan.</p></div>
+</article>
+<article class="service">
+<span class="num">03</span>
+<div><h3 data-en="You've received a media plan. Does it meet your objectives?" data-ro="Ai primit un plan de media. Răspunde obiectivelor tale?">You've received a media plan. Does it meet your objectives?</h3><p data-en="I assess the choice of channels, target audience, timing, formats and budget allocation. I can compare scenarios and flag risks or opportunities before the plan goes live." data-ro="Evaluez alegerea canalelor, targetul, perioadele de comunicare, formatele și distribuția bugetului. Pot compara scenarii și identifica riscuri sau oportunități înainte ca planul să intre în implementare.">I assess the choice of channels, target audience, timing, formats and budget allocation. I can compare scenarios and flag risks or opportunities before the plan goes live.</p></div>
+</article>
+<article class="service">
+<span class="num">04</span>
+<div><h3 data-en="The campaign has run. What did it actually deliver?" data-ro="Campania a rulat. Ce ai obținut, dincolo de cifrele din raport?">The campaign has run. What did it actually deliver?</h3><p data-en="I analyse delivery, reach, frequency, media pressure and the contribution of each channel. I put the results in a competitive context and, where the data allows, relate them to changes in brand interest or sales." data-ro="Analizez livrarea campaniei, acoperirea, frecvența, presiunea media și contribuția fiecărui canal. Pun rezultatele în contextul competiției și, atunci când datele permit, le corelez cu evoluția interesului pentru brand sau a vânzărilor.">I analyse delivery, reach, frequency, media pressure and the contribution of each channel. I put the results in a competitive context and, where the data allows, relate them to changes in brand interest or sales.</p></div>
+</article>
+<article class="service">
+<span class="num">05</span>
+<div><h3 data-en="Plenty of data, but no clear picture?" data-ro="Ai multe date, dar nu și o imagine clară?">Plenty of data, but no clear picture?</h3><p data-en="I build analyses and dashboards that bring together media, sales, distribution, digital and research data. They don't just gather the numbers in one place: they show what is happening, where the gaps are and what is worth watching next." data-ro="Construiesc analize și dashboarduri care reunesc informații din media, vânzări, distribuție, digital și research. Nu doar centralizează cifrele, ci arată ce se întâmplă, unde apar diferențele și ce merită urmărit mai departe.">I build analyses and dashboards that bring together media, sales, distribution, digital and research data. They don't just gather the numbers in one place: they show what is happening, where the gaps are and what is worth watching next.</p></div>
+</article>
+<article class="service">
+<span class="num">06</span>
+<div><h3 data-en="Need support coordinating your media activity?" data-ro="Ai nevoie de sprijin pentru coordonarea activității de media?">Need support coordinating your media activity?</h3><p data-en="I can work alongside your team on briefs, proposal reviews, agency coordination and implementation follow-up. Support can cover a single key campaign or continue on an ongoing basis." data-ro="Pot lucra alături de echipa ta pentru pregătirea brief-urilor, evaluarea propunerilor, coordonarea agențiilor și urmărirea implementării. Sprijinul poate fi punctual, pentru o campanie importantă, sau continuu.">I can work alongside your team on briefs, proposal reviews, agency coordination and implementation follow-up. Support can cover a single key campaign or continue on an ongoing basis.</p></div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="section dark" id="intelligence">
+<div class="section-grid reveal">
+<div class="label" data-en="02 · Dashboards" data-ro="02 · Dashboarduri">02 · Dashboards</div>
+<div>
+<h2 class="display" data-en="From fragmented data to a clear basis for decisions." data-ro="Din date fragmentate, o bază clară pentru decizie.">From fragmented data to a clear basis for decisions.</h2>
+<p class="intro" data-en="Using the data and research available, I build tailored analyses and dashboards around the business question and the indicators that matter for each project." data-ro="Lucrez cu datele și sursele de research disponibile pentru a construi analize și dashboarduri personalizate, pornind de la întrebarea de business și de la indicatorii relevanți pentru fiecare proiect.">Using the data and research available, I build tailored analyses and dashboards around the business question and the indicators that matter for each project.</p>
+<div class="signal">
+<div class="signal-stage">
+<div class="demo-head">
+<span class="demo-tag" data-en="Demo · illustrative data" data-ro="Demo · date ilustrative">Demo · illustrative data</span>
+<h3 class="demo-title" data-en="Post-buy — channel mix" data-ro="Post-buy — mix pe canale">Post-buy — channel mix</h3>
+<p class="demo-note" data-en="Sample post-buy report for a fictional campaign. All figures are illustrative." data-ro="Exemplu de raport post-buy pentru o campanie fictivă. Cifrele sunt fictive.">Sample post-buy report for a fictional campaign. All figures are illustrative.</p>
+</div>
+<div class="chart-bars">
+<div class="bar-row"><span>Pro TV</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span>34%</span></div>
+<div class="bar-row"><span>Antena 1</span><div class="bar-track"><div class="bar-fill" style="width:71%"></div></div><span>24%</span></div>
+<div class="bar-row"><span>Kanal D</span><div class="bar-track"><div class="bar-fill" style="width:53%"></div></div><span>18%</span></div>
+<div class="bar-row"><span>Digi 24</span><div class="bar-track"><div class="bar-fill" style="width:41%"></div></div><span>14%</span></div>
+<div class="bar-row"><span data-en="Other channels" data-ro="Alte canale">Other channels</span><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div><span>10%</span></div>
+</div>
+</div>
+<div class="signal-copy">
+<div class="label" data-en="Demo · Key figures" data-ro="Demo · Cifre-cheie">Demo · Key figures</div>
+<div>
+<div class="metric"><strong>418</strong><span data-en="Total GRP (30″) — demo week" data-ro="Total GRP (30″) — săpt. demo">Total GRP (30″) — demo week</span></div>
+<div class="metric"><strong>71%</strong><span data-en="Reach 1+ — demo" data-ro="Reach 1+ — demo">Reach 1+ — demo</span></div>
+<div class="metric"><strong>5.2×</strong><span data-en="Average frequency — demo" data-ro="Frecvență medie — demo">Average frequency — demo</span></div>
+</div>
+</div>
+</div>
+<div class="demo-ctas">
+<div class="demo-item"><span class="demo-cap" data-en="Post-buy report" data-ro="Raport post-buy">Post-buy report</span><a class="demo-cta" href="florens-postbuy-demo.html" target="_blank" rel="noopener" data-en="Open demo 1 ↗" data-ro="Deschide demo 1 ↗">Open demo 1 ↗</a></div>
+<div class="demo-item"><span class="demo-cap" data-en="TV audiences" data-ro="Audiențe TV">TV audiences</span><a class="demo-cta" href="florens-demo-dashboard.html" target="_blank" rel="noopener" data-en="Open demo 2 ↗" data-ro="Deschide demo 2 ↗">Open demo 2 ↗</a></div>
+<div class="demo-item"><span class="demo-cap" data-en="Category monitoring · access on request" data-ro="Monitorizare categorie · acces la cerere">Category monitoring · access on request</span><a class="demo-cta" href="florens-dashboard-medicamente.html" target="_blank" rel="noopener" data-en="Open demo 3 ↗" data-ro="Deschide demo 3 ↗">Open demo 3 ↗</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="approach">
+<div class="section-grid reveal">
+<div class="label" data-en="03 · How I work" data-ro="03 · Cum lucrez">03 · How I work</div>
+<div>
+<h2 class="display" data-en="I don't jump to solutions before I understand the question." data-ro="Nu mă grăbesc cu soluția înainte să înțeleg bine întrebarea.">I don't jump to solutions before I understand the question.</h2>
+<div class="process">
+<div class="step"><span class="n">01</span><h3 data-en="Understand" data-ro="Înțeleg">Understand</h3><p data-en="Objective, context, constraints, pressures and the decisions that need to be made." data-ro="Obiectiv, context, limitări, presiuni și decizii care trebuie luate.">Objective, context, constraints, pressures and the decisions that need to be made.</p></div>
+<div class="step"><span class="n">02</span><h3 data-en="Question" data-ro="Clarific">Question</h3><p data-en="I challenge assumptions and separate the real problem from its symptoms." data-ro="Verific presupunerile și separ problema reală de simptome.">I challenge assumptions and separate the real problem from its symptoms.</p></div>
+<div class="step"><span class="n">03</span><h3 data-en="Model" data-ro="Construiesc">Model</h3><p data-en="I build scenarios and alternatives and weigh their commercial implications." data-ro="Construiesc scenarii, alternative și implicații comerciale.">I build scenarios and alternatives and weigh their commercial implications.</p></div>
+<div class="step"><span class="n">04</span><h3 data-en="Measure" data-ro="Măsor">Measure</h3><p data-en="I define what should be measured and how results should be interpreted." data-ro="Stabilesc ce trebuie urmărit și cum trebuie interpretate rezultatele.">I define what should be measured and how results should be interpreted.</p></div>
+<div class="step"><span class="n">05</span><h3 data-en="Improve" data-ro="Îmbunătățesc">Improve</h3><p data-en="I turn findings into practical actions for the next decision." data-ro="Transform observațiile în acțiuni concrete pentru următoarea decizie.">I turn findings into practical actions for the next decision.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="about">
+  <div class="about-wrap reveal">
+    <div class="about-left">
+      <div class="label" data-en="04 · Meet Nicoleta" data-ro="04 · Despre Nicoleta">04 · Meet Nicoleta</div>
+      <figure class="about-portrait">
+        <img src="nicoleta-florens-monochrome.png" alt="Nicoleta, founder of Florens Media"/>
+      </figure>
+    </div>
+    <div class="about-copy">
+      <h2 class="display" data-en="A perspective shaped by more than 20 years in media." data-ro="O perspectivă construită în peste 20 de ani de experiență în media.">A perspective shaped by more than 20 years in media.</h2>
+      <blockquote class="about-quote" data-en="Data only becomes useful once you put it in context." data-ro="Datele devin utile atunci când sunt puse în context.">Data only becomes useful once you put it in context.</blockquote>
+      <div class="about-body">
+        <p data-en="In more than 20 years in media, I have worked on different sides of the industry: research, media agency, media owner and, more recently, client-side. I started out in media research, in TV audience measurement, as part of the team that set up Romania's first TV audience panel. That is where my experience with audience data comes from, and especially with television — the medium I know best." data-ro="În peste 20 de ani de experiență în media, am lucrat din perspective diferite ale industriei: research, agenție media, media owner și, mai recent, de partea clientului. Mi-am început cariera în media research, în măsurarea audiențelor TV, ca parte din echipa care a dezvoltat primul panel TV din România. De aici vine experiența mea cu datele de audiență și, mai ales, cu televiziunea — zona media pe care o cunosc în profunzime.">In more than 20 years in media, I have worked on different sides of the industry: research, media agency, media owner and, more recently, client-side. I started out in media research, in TV audience measurement, as part of the team that set up Romania's first TV audience panel. That is where my experience with audience data comes from, and especially with television — the medium I know best.</p>
+        <p data-en="My experience covers TV, radio, OOH and cinema. In integrated projects, I also consider how these channels work alongside digital. I have worked on brands in FMCG, retail, pharma, services and many other categories. Every project starts from the client's objective and context, not from a standard media formula. Florens Media brings all of this together: strategy, research, analysis and independent advice." data-ro="Experiența mea acoperă TV, radio, OOH și cinema. În proiectele integrate, analizez aceste canale și în relație cu digitalul. Am lucrat pentru branduri și proiecte din FMCG, retail, pharma, servicii și multe alte categorii. Fiecare proiect pornește de la obiectivul și contextul clientului, nu de la o rețetă media prestabilită. Florens Media aduce împreună această experiență în strategie, research, analiză și consultanță independentă.">My experience covers TV, radio, OOH and cinema. In integrated projects, I also consider how these channels work alongside digital. I have worked on brands in FMCG, retail, pharma, services and many other categories. Every project starts from the client's objective and context, not from a standard media formula. Florens Media brings all of this together: strategy, research, analysis and independent advice.</p>
+      </div>
+      <div class="about-facts">
+        <span data-en="20+ years in media" data-ro="20+ ani în media">20+ years in media</span>
+        <span data-en="Offline media" data-ro="Media offline">Offline media</span>
+        <span data-en="Research &amp; audiences" data-ro="Cercetare și audiențe">Research &amp; audiences</span>
+        <span data-en="Client · agency" data-ro="Client · agenție">Client · agency</span>
+        <span data-en="Media owner · research" data-ro="Media owner · research">Media owner · research</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+<div class="section-grid reveal">
+<div class="label" data-en="05 · Insights" data-ro="05 · Perspective">05 · Insights</div>
+<div>
+<h2 class="display" data-en="Worth considering before your next media investment." data-ro="Idei utile înainte de următoarea investiție media.">Worth considering before your next media investment.</h2>
+<p class="intro" data-en="Perspectives on strategy, audiences, measurement and the media decisions behind the numbers." data-ro="Observații despre strategie, audiențe, măsurare și deciziile media din spatele cifrelor.">Perspectives on strategy, audiences, measurement and the media decisions behind the numbers.</p>
+<div class="insights">
+<article class="insight"><span class="tag" data-en="Strategy" data-ro="Strategie">Strategy</span><h3 data-en="When is the right time to bring in a media consultant?" data-ro="Când este momentul potrivit pentru consultanță media?">When is the right time to bring in a media consultant?</h3><p data-en="Usually, before something stops working." data-ro="De cele mai multe ori, înainte ca ceva să nu mai funcționeze.">Usually, before something stops working.</p></article>
+<article class="insight"><span class="tag" data-en="Agency" data-ro="Agenție">Agency</span><h3 data-en="A clear brief shortens the whole process." data-ro="Un brief clar scurtează tot procesul.">A clear brief shortens the whole process.</h3><p data-en="Most delays start with an unclear objective, not with execution." data-ro="Majoritatea întârzierilor pornesc de la un obiectiv neclar, nu de la execuție.">Most delays start with an unclear objective, not with execution.</p></article>
+<article class="insight"><span class="tag" data-en="Research" data-ro="Cercetare">Research</span><h3 data-en="Audience data tells you more than a GRP figure." data-ro="Datele de audiență spun mai mult decât un GRP.">Audience data tells you more than a GRP figure.</h3><p data-en="Who you reach matters as much as how often." data-ro="Contează și cine e expus, nu doar de câte ori.">Who you reach matters as much as how often.</p></article>
+<article class="insight"><span class="tag" data-en="Measurement" data-ro="Măsurare">Measurement</span><h3 data-en="What changed after the campaign?" data-ro="Ce s-a schimbat după campanie?">What changed after the campaign?</h3><p data-en="That matters more than whether the plan was delivered exactly as contracted." data-ro="Răspunsul contează mai mult decât simpla livrare a planului conform contractului.">That matters more than whether the plan was delivered exactly as contracted.</p></article>
+<article class="insight"><span class="tag" data-en="Competitive" data-ro="Competiție">Competitive</span><h3 data-en="Share of voice without context says very little." data-ro="Share of voice, fără context, spune puțin.">Share of voice without context says very little.</h3><p data-en="Pressure, timing and the quality of exposure matter just as much as the percentage." data-ro="Presiunea, momentul și calitatea expunerii cântăresc la fel de mult ca procentul.">Pressure, timing and the quality of exposure matter just as much as the percentage.</p></article>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="start">
+<div class="section-grid reveal">
+<div class="label" data-en="06 · How we start" data-ro="06 · Cum începem">06 · How we start</div>
+<div>
+<h2 class="display" data-en="The first step is a conversation." data-ro="Primul pas e o discuție.">The first step is a conversation.</h2>
+<div class="process">
+<div class="step"><span class="n">01</span><h3 data-en="A 30-minute call" data-ro="Discuție de 30 de minute">A 30-minute call</h3><p data-en="Free of charge. You tell me the context and the decision you need to make." data-ro="Fără cost. Îmi spui contextul și decizia pe care trebuie să o iei.">Free of charge. You tell me the context and the decision you need to make.</p></div>
+<div class="step"><span class="n">02</span><h3 data-en="A clear proposal" data-ro="O propunere clară">A clear proposal</h3><p data-en="Within a few days: what I will look at, how long it will take and what it will cost." data-ro="În câteva zile: ce analizez, în cât timp și cu ce cost.">Within a few days: what I will look at, how long it will take and what it will cost.</p></div>
+<div class="step"><span class="n">03</span><h3 data-en="The work itself" data-ro="Lucrul efectiv">The work itself</h3><p data-en="A one-off project or ongoing support, depending on what you need." data-ro="Un proiect punctual sau o colaborare continuă, în funcție de ce ai nevoie.">A one-off project or ongoing support, depending on what you need.</p></div>
+</div>
+<a class="start-cta" href="#contact" data-en="Book the call" data-ro="Programează discuția">Book the call</a>
+</div>
+</div>
+</section>
+<section class="contact" id="contact">
+<div class="contact-wrap reveal">
+<div class="contact-intro">
+<h2 data-en="Sometimes, an outside perspective changes the decision." data-ro="Uneori, o perspectivă din exterior schimbă decizia.">Sometimes, an outside perspective changes the decision.</h2>
+<p data-en="For media strategy, research, audit, campaign evaluation and custom dashboard projects." data-ro="Pentru proiecte de strategie media, cercetare, audit, evaluarea campaniilor sau dashboarduri personalizate.">For media strategy, research, audit, campaign evaluation and custom dashboard projects.</p>
+<div class="contact-links">
+<a href="tel:+40745022230"><small data-en="Phone" data-ro="Telefon">Phone</small><strong>+40 745 022 230</strong></a>
+<a href="mailto:office@florensmedia.ro"><small>Email</small><strong>office@florensmedia.ro</strong></a>
+</div>
+</div>
+<form class="contact-form" id="contactForm" novalidate>
+<input type="hidden" name="access_key" value="66815ef5-a7ab-4827-904c-41d5406fb93c">
+<input type="hidden" name="subject" value="Mesaj nou de pe florensmedia.ro">
+<input type="hidden" name="from_name" value="Site Florens Media">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+<div class="cf-grid">
+<label class="cf-field"><span data-en="Name" data-ro="Nume">Name</span><input type="text" name="name" required autocomplete="name"></label>
+<label class="cf-field"><span data-en="Email" data-ro="Email">Email</span><input type="email" name="email" required autocomplete="email"></label>
+<label class="cf-field"><span data-en="Company" data-ro="Companie">Company</span><input type="text" name="company" autocomplete="organization"></label>
+<label class="cf-field"><span data-en="What can I help with?" data-ro="Cu ce te pot ajuta?">What can I help with?</span>
+<select name="topic">
+<option value="Strategie media" data-en="Media strategy" data-ro="Strategie media">Media strategy</option>
+<option value="Evaluare plan media" data-en="Media plan review" data-ro="Evaluare plan media">Media plan review</option>
+<option value="Evaluare campanie / post-buy" data-en="Campaign evaluation / post-buy" data-ro="Evaluare campanie / post-buy">Campaign evaluation / post-buy</option>
+<option value="Dashboard / analiză date" data-en="Dashboard / data analysis" data-ro="Dashboard / analiză date">Dashboard / data analysis</option>
+<option value="Sprijin coordonare media" data-en="Media coordination support" data-ro="Sprijin coordonare media">Media coordination support</option>
+<option value="Altceva" data-en="Something else" data-ro="Altceva">Something else</option>
+</select></label>
+<label class="cf-field cf-wide"><span data-en="Message" data-ro="Mesaj">Message</span><textarea name="message" rows="4" required></textarea></label>
+</div>
+<label class="cf-consent"><input type="checkbox" name="gdpr" value="Da" required><span><span data-en="I have read the" data-ro="Am citit">I have read the</span> <a href="confidentialitate.html" target="_blank" rel="noopener" data-en="Privacy Policy" data-ro="Politica de confidențialitate">Privacy Policy</a>.</span></label>
+<button type="submit" class="cf-submit" data-en="Send message" data-ro="Trimite mesajul">Send message</button>
+<p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+<footer>
+<span class="legal">© 2026 FLORENS MEDIA STRATEGY S.R.L. · CUI 55617551 · J2026055292007 · <span style="text-transform:none">Str. Muzelor nr. 33, Bragadiru, Ilfov</span> · <a href="confidentialitate.html" data-en="Privacy Policy" data-ro="Politica de confidențialitate">Privacy Policy</a></span>
+</footer>
+<script>
+let currentLang='ro';
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{threshold:.16});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const heroSection = document.querySelector('.hero');
+const heroVideo = heroSection?.querySelector('video');
+if(heroVideo){
+  const soundToggle = heroSection.querySelector('.sound-toggle');
+  const soundLabel = soundToggle?.querySelector('.sound-label');
+
+  const updateSoundControl = ()=>{
+    const soundIsOn = !heroVideo.muted && heroVideo.volume > 0;
+    soundToggle?.setAttribute('aria-pressed', String(soundIsOn));
+    if(soundToggle){
+      soundToggle.setAttribute(
+        'aria-label',
+        soundIsOn
+          ? (currentLang === 'ro' ? 'Oprește sunetul' : 'Turn sound off')
+          : (currentLang === 'ro' ? 'Pornește sunetul' : 'Turn sound on')
+      );
+    }
+    if(soundLabel){
+      soundLabel.textContent = soundIsOn
+        ? (currentLang === 'ro' ? 'Fără sunet' : 'Sound off')
+        : (currentLang === 'ro' ? 'Cu sunet' : 'Sound on');
+    }
+  };
+
+  soundToggle?.addEventListener('click', async ()=>{
+    if(heroVideo.muted){
+      heroVideo.muted = false;
+      heroVideo.volume = 0;
+
+      // Every time sound is turned on, replay the hero animation from the beginning.
+      try{ heroVideo.currentTime = 0; }catch(e){}
+      try{ await heroVideo.play(); }catch(e){}
+
+      const targetVolume = .38;
+      const step = .038;
+      const fadeIn = window.setInterval(()=>{
+        heroVideo.volume = Math.min(targetVolume, heroVideo.volume + step);
+        if(heroVideo.volume >= targetVolume) window.clearInterval(fadeIn);
+      },35);
+    }else{
+      heroVideo.muted = true;
+    }
+    updateSoundControl();
+  });
+
+  updateSoundControl();
+  window.addEventListener('florens-language-change', updateSoundControl);
+
+  heroVideo.addEventListener('ended',()=>{
+    try{
+      heroVideo.currentTime = Math.max(0, heroVideo.duration - 0.04);
+      heroVideo.pause();
+    }catch(e){}
+  });
+  window.addEventListener('scroll',()=>{
+    const y = Math.min(window.scrollY * .025, 18);
+    const x = window.matchMedia('(max-width:900px)').matches ? '4vw' : '7vw';
+    heroVideo.style.transform = `translateX(calc(14vw + ${x})) translateY(${y}px) scale(1.08)`;
+  },{passive:true});
+}
+
+const toggle=document.querySelector('.lang-toggle');
+function setLanguage(lang){
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-en][data-ro]').forEach(el=>{
+    el.textContent=el.dataset[lang];
+  });
+  toggle.textContent=lang==='en'?'RO':'EN';
+  toggle.setAttribute('aria-label',lang==='en'?'Schimbă limba în română':'Switch language to English');
+  window.dispatchEvent(new CustomEvent('florens-language-change', {detail:{lang}}));
+}
+toggle?.addEventListener('click',()=>setLanguage(currentLang==='en'?'ro':'en'));
+window.addEventListener('florens-language-change',()=>{document.querySelectorAll('a[href^="confidentialitate.html"]').forEach(l=>{l.href='confidentialitate.html'+(currentLang==='en'?'?lang=en':'');});});
+document.querySelectorAll('a[href^="confidentialitate.html"]').forEach(l=>{l.href='confidentialitate.html'+(currentLang==='en'?'?lang=en':'');});
+
+const cForm=document.getElementById('contactForm');
+const cStatus=document.getElementById('cfStatus');
+const cMsg={
+  missing:{ro:'Te rog completează numele, emailul și mesajul și bifează că ai citit Politica de confidențialitate.',en:'Please fill in your name, email and message, and confirm you have read the Privacy Policy.'},
+  sending:{ro:'Se trimite…',en:'Sending…'},
+  ok:{ro:'Mulțumesc! Mesajul a fost trimis. Revin în cel mai scurt timp.',en:"Thank you — your message has been sent. I'll get back to you shortly."},
+  err:{ro:'Mesajul nu a putut fi trimis. Te rog scrie-mi direct la office@florensmedia.ro.',en:"Sorry, your message couldn't be sent. Please email office@florensmedia.ro directly."}
+};
+let cKey='';
+const setStatus=k=>{cKey=k;cStatus.textContent=k?cMsg[k][currentLang]:'';};
+window.addEventListener('florens-language-change',()=>{if(cKey)setStatus(cKey);});
+cForm?.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const req=[...cForm.querySelectorAll('[required]')];
+  let okAll=true;
+  req.forEach(f=>{if(f.type==='checkbox'){const bad=!f.checked;f.closest('.cf-consent').classList.toggle('invalid',bad);if(bad)okAll=false;return;}const bad=!f.value.trim()||(f.type==='email'&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value.trim()));f.classList.toggle('invalid',bad);if(bad)okAll=false;});
+  if(!okAll){setStatus('missing');return;}
+  const fd=new FormData(cForm);
+  const btn=cForm.querySelector('.cf-submit');
+  btn.disabled=true;setStatus('sending');
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:fd});
+    const data=await res.json();
+    if(data.success){cForm.reset();setStatus('ok');}
+    else{setStatus('err');}
+  }catch(err){setStatus('err');}
+  btn.disabled=false;
+});
+setLanguage('ro');
+</script>
+</body>
+</html>
