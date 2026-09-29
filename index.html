@@ -590,7 +590,7 @@ img,video{display:block;max-width:100%}
   text-transform:uppercase;
 }
 @media(max-width:900px){
-  .sound-toggle{right:6vw;bottom:142px}
+  .sound-toggle{right:20px;bottom:auto;top:88px}
   .about-wrap{grid-template-columns:1fr;gap:44px}
   .about-left{gap:36px}
   .about-portrait,.about-portrait img{min-height:520px}
@@ -716,6 +716,27 @@ footer{
   .exp{border-right:0;border-bottom:1px solid var(--line);padding:24px 0!important}
   footer{flex-direction:column;gap:10px}
 }
+.hero-inner>*{min-width:0}
+.hero h1,.display,.contact h2{overflow-wrap:break-word;hyphens:manual}
+@media(max-width:600px){
+  .hero h1{font-size:clamp(40px,12vw,56px);line-height:.9}
+  .hero-kicker{letter-spacing:.14em;line-height:1.6}
+  .hero-bottom p{font-size:16px}
+  .hero-actions{gap:18px}
+  .display{font-size:clamp(36px,10.5vw,46px)}
+  .contact .contact-intro h2{font-size:clamp(38px,11vw,52px)}
+}
+
+.to-top{position:fixed;right:24px;bottom:24px;z-index:60;width:54px;height:54px;border:0;border-radius:50%;padding:0;background:#141414;color:#f5f2eb;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.22);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.to-top .ring-bg{fill:none;stroke:rgba(245,242,235,.18);stroke-width:2.5}
+.to-top .ring{fill:none;stroke:#e8b08c;stroke-width:2.5;stroke-linecap:round;transition:stroke-dashoffset .1s linear}
+.to-top .arrow{position:relative;display:grid;place-items:center;width:100%;height:100%}
+.to-top .arrow svg{position:static;width:18px;height:18px;transform:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.to-top:hover{background:#2a2a2a}
+.to-top:focus-visible{outline:2px solid #e8b08c;outline-offset:3px}
+@media(max-width:600px){.to-top{right:16px;bottom:16px;width:48px;height:48px}}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
@@ -902,7 +923,7 @@ footer{
 <div class="section-grid reveal">
 <div class="label" data-en="06 · How we start" data-ro="06 · Cum începem">06 · How we start</div>
 <div>
-<h2 class="display" data-en="The first step is a conversation." data-ro="Primul pas e o discuție.">The first step is a conversation.</h2>
+<h2 class="display" data-en="The first step is a conversation." data-ro="Primul pas e o discuție.">The first step is a conversation.</h2>
 <div class="process">
 <div class="step"><span class="n">01</span><h3 data-en="A 30-minute call" data-ro="Discuție de 30 de minute">A 30-minute call</h3><p data-en="Free of charge. You tell me the context and the decision you need to make." data-ro="Fără cost. Îmi spui contextul și decizia pe care trebuie să o iei.">Free of charge. You tell me the context and the decision you need to make.</p></div>
 <div class="step"><span class="n">02</span><h3 data-en="A clear proposal" data-ro="O propunere clară">A clear proposal</h3><p data-en="Within a few days: what I will look at, how long it will take and what it will cost." data-ro="În câteva zile: ce analizez, în cât timp și cu ce cost.">Within a few days: what I will look at, how long it will take and what it will cost.</p></div>
@@ -915,7 +936,7 @@ footer{
 <section class="contact" id="contact">
 <div class="contact-wrap reveal">
 <div class="contact-intro">
-<h2 data-en="Sometimes, an outside perspective changes the decision." data-ro="Uneori, o perspectivă din exterior schimbă decizia.">Sometimes, an outside perspective changes the decision.</h2>
+<h2 data-en="Sometimes, an outside perspective changes the decision." data-ro="Uneori, o perspectivă din exterior schimbă decizia.">Sometimes, an outside perspective changes the decision.</h2>
 <p data-en="For media strategy, research, audit, campaign evaluation and custom dashboard projects." data-ro="Pentru proiecte de strategie media, cercetare, audit, evaluarea campaniilor sau dashboarduri personalizate.">For media strategy, research, audit, campaign evaluation and custom dashboard projects.</p>
 <div class="contact-links">
 <a href="tel:+40745022230"><small data-en="Phone" data-ro="Telefon">Phone</small><strong>+40 745 022 230</strong></a>
@@ -948,6 +969,10 @@ footer{
 </form>
 </div>
 </section>
+<button class="to-top" type="button" aria-label="Înapoi sus">
+<svg viewBox="0 0 54 54" aria-hidden="true"><circle class="ring-bg" cx="27" cy="27" r="25"></circle><circle class="ring" cx="27" cy="27" r="25"></circle></svg>
+<span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></span>
+</button>
 <footer>
 <span class="legal">© 2026 FLORENS MEDIA STRATEGY S.R.L. · CUI 55617551 · J2026055292007 · <span style="text-transform:none">Str. Muzelor nr. 33, Bragadiru, Ilfov</span> · <a href="confidentialitate.html" data-en="Privacy Policy" data-ro="Politica de confidențialitate">Privacy Policy</a></span>
 </footer>
@@ -1065,6 +1090,25 @@ cForm?.addEventListener('submit',async(e)=>{
   btn.disabled=false;
 });
 setLanguage('ro');
+
+(()=>{
+  const btn=document.querySelector('.to-top');if(!btn)return;
+  const ring=btn.querySelector('.ring');const C=2*Math.PI*25;
+  ring.style.strokeDasharray=C;ring.style.strokeDashoffset=C;
+  let ticking=false;
+  const update=()=>{
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+    const p=max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
+    ring.style.strokeDashoffset=C*(1-p);
+    btn.classList.toggle('show',window.scrollY>window.innerHeight*0.6);
+    ticking=false;
+  };
+  window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+  window.addEventListener('resize',update);
+  btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  window.addEventListener('florens-language-change',()=>btn.setAttribute('aria-label',currentLang==='en'?'Back to top':'Înapoi sus'));
+  update();
+})();
 </script>
 </body>
 </html>
