@@ -759,6 +759,15 @@ footer{
 .faq-item summary::after{content:"+";flex:0 0 auto;font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:300;color:var(--accent);transition:transform .25s}
 .faq-item[open] summary::after{transform:rotate(45deg)}
 .faq-item p{margin:0 0 26px;max-width:720px;color:var(--muted);line-height:1.65;font-size:16px}
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
+.art-card{display:flex;flex-direction:column;text-decoration:none;border-top:1px solid var(--ink);padding-top:22px;transition:.25s}
+.art-card .tag{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}
+.art-card h3{margin:16px 0 14px;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(25px,2.4vw,32px);line-height:1.1}
+.art-card p{margin:0 0 22px;color:var(--muted);line-height:1.55;font-size:15px}
+.art-card .go{margin-top:auto;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.art-card:hover h3{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.art-card:hover .go{color:var(--accent)}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr;gap:36px}}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
@@ -773,6 +782,7 @@ footer{
 <a data-en="Analysis" data-ro="Analiză" href="#intelligence">Analiză</a>
 <a data-en="Approach" data-ro="Abordare" href="#approach">Abordare</a>
 <a data-en="About" data-ro="Despre mine" href="#about">Despre mine</a>
+<a data-en="Articles" data-ro="Articole" href="#insights">Articole</a>
 <a data-en="Contact" data-ro="Contact" href="#contact">Contact</a>
 <button aria-label="Switch language to English" class="lang-toggle" type="button">EN</button>
 </nav>
@@ -926,18 +936,16 @@ footer{
     </div>
   </div>
 </section>
-<section class="section">
+<section class="section" id="insights">
 <div class="section-grid reveal">
 <div class="label" data-en="05 · Insights" data-ro="05 · Perspective">05 · Perspective</div>
 <div>
 <h2 class="display" data-en="Worth considering before your next media investment." data-ro="Idei utile înainte de următoarea investiție media.">Idei utile înainte de următoarea investiție media.</h2>
 <p class="intro" data-en="Perspectives on strategy, audiences, measurement and the media decisions behind the numbers." data-ro="Observații despre strategie, audiențe, măsurare și deciziile media din spatele cifrelor.">Observații despre strategie, audiențe, măsurare și deciziile media din spatele cifrelor.</p>
-<div class="insights">
-<article class="insight"><span class="tag" data-en="Strategy" data-ro="Strategie">Strategie</span><h3 data-en="When is the right time to bring in a media consultant?" data-ro="Când este momentul potrivit pentru consultanță media?">Când este momentul potrivit pentru consultanță media?</h3><p data-en="Usually, before something stops working." data-ro="De cele mai multe ori, înainte ca ceva să nu mai funcționeze.">De cele mai multe ori, înainte ca ceva să nu mai funcționeze.</p></article>
-<article class="insight"><span class="tag" data-en="Agency" data-ro="Agenție">Agenție</span><h3 data-en="A clear brief shortens the whole process." data-ro="Un brief clar scurtează tot procesul.">Un brief clar scurtează tot procesul.</h3><p data-en="Most delays start with an unclear objective, not with execution." data-ro="Majoritatea întârzierilor pornesc de la un obiectiv neclar, nu de la execuție.">Majoritatea întârzierilor pornesc de la un obiectiv neclar, nu de la execuție.</p></article>
-<article class="insight"><span class="tag" data-en="Research" data-ro="Cercetare">Cercetare</span><h3 data-en="Audience data tells you more than a GRP figure." data-ro="Datele de audiență spun mai mult decât un GRP.">Datele de audiență spun mai mult decât un GRP.</h3><p data-en="Who you reach matters as much as how often." data-ro="Contează și cine e expus, nu doar de câte ori.">Contează și cine e expus, nu doar de câte ori.</p></article>
-<article class="insight"><span class="tag" data-en="Measurement" data-ro="Măsurare">Măsurare</span><h3 data-en="What changed after the campaign?" data-ro="Ce s-a schimbat după campanie?">Ce s-a schimbat după campanie?</h3><p data-en="That matters more than whether the plan was delivered exactly as contracted." data-ro="Răspunsul contează mai mult decât simpla livrare a planului conform contractului.">Răspunsul contează mai mult decât simpla livrare a planului conform contractului.</p></article>
-<article class="insight"><span class="tag" data-en="Competitive" data-ro="Competiție">Competiție</span><h3 data-en="Share of voice without context says very little." data-ro="Share of voice, fără context, spune puțin.">Share of voice, fără context, spune puțin.</h3><p data-en="Pressure, timing and the quality of exposure matter just as much as the percentage." data-ro="Presiunea, momentul și calitatea expunerii cântăresc la fel de mult ca procentul.">Presiunea, momentul și calitatea expunerii cântăresc la fel de mult ca procentul.</p></article>
+<div class="art-grid">
+<a class="art-card" href="se-mai-uita-lumea-la-televizor.html"><span class="tag" data-en="Television" data-ro="Televiziune">Televiziune</span><h3 data-en="Do people still watch TV?" data-ro="Se mai uită lumea la televizor?">Se mai uită lumea la televizor?</h3><p data-en="Audiences are falling, but “falling” is not the same as “irrelevant”. Why personal habits are the weakest starting point for a media decision." data-ro="Audiența scade, dar între „scade” și „nu mai contează” e o diferență mare. De ce propriile obiceiuri sunt cel mai slab punct de plecare pentru o decizie media.">Audiența scade, dar între „scade” și „nu mai contează” e o diferență mare. De ce propriile obiceiuri sunt cel mai slab punct de plecare pentru o decizie media.</p><span class="go" data-en="Read the article (in Romanian) →" data-ro="Citește articolul →">Citește articolul →</span></a>
+<a class="art-card" href="intrebari-inainte-sa-aprobi-un-plan-media.html"><span class="tag" data-en="Media planning" data-ro="Planificare media">Planificare media</span><h3 data-en="5 questions to ask before approving a media plan" data-ro="5 întrebări de pus înainte să aprobi un plan media">5 întrebări de pus înainte să aprobi un plan media</h3><p data-en="Many campaign problems are visible in the plan itself. Five simple questions to ask before approval, not after the budget is spent." data-ro="Multe probleme dintr-o campanie se văd încă din plan. Cinci întrebări simple, de pus înainte de aprobare, nu după ce bugetul a fost cheltuit.">Multe probleme dintr-o campanie se văd încă din plan. Cinci întrebări simple, de pus înainte de aprobare, nu după ce bugetul a fost cheltuit.</p><span class="go" data-en="Read the article (in Romanian) →" data-ro="Citește articolul →">Citește articolul →</span></a>
+<a class="art-card" href="toata-lumea-se-pricepe-la-media.html"><span class="tag" data-en="Strategy & message" data-ro="Strategie & mesaj">Strategie & mesaj</span><h3 data-en="Everyone is an expert in media" data-ro="Toată lumea se pricepe și la media">Toată lumea se pricepe și la media</h3><p data-en="Media can deliver a message very efficiently, but it cannot turn a weak message into a strong one. Why a good campaign does not start with media." data-ro="Media poate distribui foarte eficient un mesaj, dar nu poate face dintr-un mesaj slab unul bun. De ce o campanie bună nu începe cu media.">Media poate distribui foarte eficient un mesaj, dar nu poate face dintr-un mesaj slab unul bun. De ce o campanie bună nu începe cu media.</p><span class="go" data-en="Read the article (in Romanian) →" data-ro="Citește articolul →">Citește articolul →</span></a>
 </div>
 </div>
 </div>
@@ -1150,5 +1158,6 @@ setLanguage('ro');
   update();
 })();
 </script>
+<script>(()=>{const fix=()=>document.querySelectorAll('a.art-card').forEach(a=>{a.href=a.getAttribute('href').split('?')[0]+(currentLang==='en'?'?lang=en':'');});window.addEventListener('florens-language-change',fix);if(new URLSearchParams(location.search).get('lang')==='en')setLanguage('en');fix();})();</script>
 </body>
 </html>
