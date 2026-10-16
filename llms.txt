@@ -20,6 +20,8 @@ Florens Media is an independent media consultancy based in Romania, founded by N
 - [Pagina principală](https://florensmedia.ro/): servicii, mod de lucru, despre Nicoleta Florescu, întrebări frecvente, contact
 - [Demo raport post-buy](https://florensmedia.ro/florens-postbuy-demo.html): exemplu cu date fictive
 - [Demo dashboard audiențe TV](https://florensmedia.ro/florens-demo-dashboard.html): exemplu cu date fictive
+- [Articole](https://florensmedia.ro/articole.html): lista tuturor articolelor
+- [Cum alegi targetul pentru o campanie TV](https://florensmedia.ro/cum-alegi-targetul-pentru-o-campanie-tv.html): articol, Targetul de raportare TV se preia des din brief în brief fără verificare. Ce variabile oferă panelul de audiență dincolo de vârstă și sex și cum verifici în trei pași dacă targetul mai descrie cumpărătorul.
 - [Se mai uită lumea la televizor?](https://florensmedia.ro/se-mai-uita-lumea-la-televizor.html): articol, Audiența TV scade, dar „nu se mai uită nimeni la televizor” nu descrie realitatea. Cum evaluezi televiziunea ca orice alt canal media, fără mituri și fără reflexe.
 - [5 întrebări de pus înainte să aprobi un plan media](https://florensmedia.ro/intrebari-inainte-sa-aprobi-un-plan-media.html): articol, Cinci întrebări simple pe care orice brand manager le poate pune înainte să aprobe un plan media: target, acoperire și frecvență, canale, buget și măsurarea rezultatelor.
 - [Toată lumea se pricepe și la media](https://florensmedia.ro/toata-lumea-se-pricepe-la-media.html): articol, Media poate distribui eficient un mesaj, dar nu poate transforma un mesaj slab într-unul bun. De ce research-ul și creația contează înaintea bugetului media.

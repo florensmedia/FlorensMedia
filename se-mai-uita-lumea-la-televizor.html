@@ -56,6 +56,7 @@ article li::before{content:"";position:absolute;left:4px;top:22px;width:8px;heig
 footer{padding:24px 6vw 30px;background:var(--ink);color:#9d9a93;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 footer a{color:inherit}
 @media(max-width:700px){.more-grid{grid-template-columns:1fr}.cta{padding:34px 24px;margin:30px 16px 0}article p{font-size:17px}}
+.all{display:inline-block;margin-top:34px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:4px}.all:hover{color:var(--accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -111,7 +112,7 @@ footer a{color:inherit}
 <p>Primul pas e o discuție de 30 de minute, fără cost.</p>
 <a href="index.html#contact">Hai să discutăm</a>
 </div>
-<section class="more"><div class="label">Alte articole</div><div class="more-grid"><a class="card" href="intrebari-inainte-sa-aprobi-un-plan-media.html"><span class="tag">Planificare media</span><h4>5 întrebări de pus înainte să aprobi un plan media</h4><span class="go">Citește articolul →</span></a><a class="card" href="toata-lumea-se-pricepe-la-media.html"><span class="tag">Strategie & mesaj</span><h4>Toată lumea se pricepe și la media</h4><span class="go">Citește articolul →</span></a></div></section>
+<section class="more"><div class="label">Alte articole</div><div class="more-grid"><a class="card" href="intrebari-inainte-sa-aprobi-un-plan-media.html"><span class="tag">Planificare media</span><h4>5 întrebări de pus înainte să aprobi un plan media</h4><span class="go">Citește articolul →</span></a><a class="card" href="toata-lumea-se-pricepe-la-media.html"><span class="tag">Strategie & mesaj</span><h4>Toată lumea se pricepe și la media</h4><span class="go">Citește articolul →</span></a></div><a class="all" href="articole.html">Toate articolele →</a></section>
 <footer>© 2026 FLORENS MEDIA STRATEGY S.R.L. · CUI 55617551 · J2026055292007 · <a href="confidentialitate.html">Politica de confidențialitate</a> · <a href="https://www.linkedin.com/company/florens-media/" target="_blank" rel="noopener">LinkedIn</a></footer>
 <script>
 (()=>{
@@ -123,7 +124,7 @@ q('header .wordmark').href='index.html?lang=en';
 q('.cta h3').textContent='Do you have a media plan or campaign and want an outside perspective?';
 q('.cta p').textContent='The first step is a free 30-minute call.';
 q('.cta a').textContent="Let's talk";q('.cta a').href='index.html?lang=en#contact';
-q('.more .label').textContent='More articles (in Romanian)';
+q('.more .label').textContent='More articles (in Romanian)';q('.more .all').textContent='All articles →';q('.more .all').href='articole.html?lang=en';
 document.querySelectorAll('.more a').forEach(a=>{a.href=a.getAttribute('href').split('?')[0]+'?lang=en';});
 document.querySelectorAll('footer a[href^="confidentialitate"]').forEach(a=>{a.href='confidentialitate.html?lang=en';a.textContent='Privacy Policy';});
 })();
