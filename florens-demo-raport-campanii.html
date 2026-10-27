@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Raport campanii TV</title>
+<meta name="description" content="Florens Media: exemplu de raport anual care reunește post-buy-urile tuturor campaniilor TV.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --bg:#f5f2eb;--panel:#ffffff;--ink:#141414;--muted:#6f6d67;--line:#e2dccf;
+  --accent:#8f4f39;--accent-soft:#f1dccf;--teal:#2f6b52;--teal-soft:#d6e6dd;--warn:#b8742c;--warn-soft:#f6e3c8;
+  --low:#cfc8ba;--bar-bg:#efe9dd;--top:#141414;--top-ink:#ffffff;--top-muted:#c8c4bb;
+  --shadow:0 14px 34px rgba(20,20,20,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
+  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--warn:#dba05e;--warn-soft:#3a2d1c;
+  --low:#4a463f;--bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}}
+:root[data-theme="dark"]{
+  --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
+  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--warn:#dba05e;--warn-soft:#3a2d1c;
+  --low:#4a463f;--bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{background:var(--top);color:var(--top-ink)}
+.top .in{max-width:1120px;margin:0 auto;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-size:16px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--top-ink)}
+.tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--top-muted);border:1px solid rgba(255,255,255,.22);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{padding:40px 0 18px}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(28px,5vw,44px);line-height:1.12;margin:10px 0 12px;max-width:820px}
+.lede{color:var(--muted);max-width:740px;margin:0;font-size:16px}
+.band{margin-top:18px;display:inline-block;font-size:12px;color:var(--muted);background:var(--panel);border:1px dashed var(--line);padding:7px 12px;border-radius:6px}
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sec{font-family:Georgia,serif;font-weight:400;font-size:26px;margin:34px 0 4px}
+.sec-sub{color:var(--muted);margin:0 0 16px;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:Georgia,serif;font-size:28px;line-height:1.15;margin-top:6px}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);min-width:0;margin-bottom:18px}
+.card h2{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 4px}
+.card .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.grid>.card{margin-bottom:0}
+.gridwrap{margin-bottom:18px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.fn{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);margin-top:12px;padding-top:9px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--muted);font-size:11px;font-family:inherit}
+.gantt{position:relative}
+.g-row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.g-row:hover .g-name{color:var(--accent)}
+.g-row.sel .g-name{font-weight:700}
+.g-name{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-name small{display:block;color:var(--muted);font-size:11px}
+.g-track{position:relative;height:18px;background:linear-gradient(90deg,var(--bar-bg) 1px,transparent 1px) 0 0/calc(100%/10) 100%}
+.g-bar{position:absolute;top:2px;height:14px;border-radius:3px}
+.g-months{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:11px;color:var(--muted);margin-bottom:4px}
+.g-months div:last-child{display:grid;grid-template-columns:repeat(10,1fr)}
+.causes .c{margin:10px 0}
+.causes .c .t{display:flex;justify-content:space-between;font-size:13px}
+.causes .c .b{height:10px;background:var(--bar-bg);border-radius:3px;margin-top:5px;overflow:hidden}
+.causes .c .b span{display:block;height:100%;background:var(--accent);border-radius:3px}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 6px;border-bottom:1px solid var(--line)}
+.tbl td{padding:10px 6px;border-bottom:1px solid var(--line)}
+.tbl tr{cursor:pointer}
+.tbl tbody tr:hover td{background:var(--bar-bg)}
+.tbl tr.sel td{background:var(--accent-soft)}
+.tbl .n{text-align:right;white-space:nowrap}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
+.ok{background:var(--teal-soft);color:var(--teal)}
+.lo{background:var(--warn-soft);color:var(--warn)}
+.bad{background:var(--accent-soft);color:var(--accent)}
+.hide-m{}
+.detail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:36px 0 14px}
+.detail-head h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:4px 0 0}
+.detail-head .meta{color:var(--muted);font-size:14px}
+.nav-btns{display:flex;gap:8px}
+.nav-btns button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}
+.pv{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:18px}
+.pv .kpi .v{font-size:24px}
+.pv .d{font-size:12px;font-weight:600;margin-top:4px}
+.pos{color:var(--teal)}.neg{color:var(--accent)}.neu{color:var(--muted)}
+.split .r{display:grid;grid-template-columns:90px 1fr 48px;gap:10px;align-items:center;font-size:13px;margin:8px 0}
+.split .b{height:12px;background:var(--bar-bg);border-radius:3px;overflow:hidden;position:relative}
+.split .b span{position:absolute;left:0;top:0;bottom:0;background:var(--teal);border-radius:3px}
+.split .b em{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
+.split .p{text-align:right;font-family:Georgia,serif}
+.concl{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:20px 22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.concl h2{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px}
+.concl ul{margin:0;padding-left:18px}
+.concl li{margin:6px 0}
+.cta{background:var(--top);color:var(--top-ink);border-radius:12px;padding:30px 24px;margin:26px 0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cta h3{font-family:Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px}
+.cta p{margin:0;color:var(--top-muted);max-width:620px}
+.cta a.btn{display:inline-block;background:var(--top-ink);color:var(--top);text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:600;white-space:nowrap}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer .in{max-width:1120px;margin:0 auto;padding:18px 16px 30px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){
+  .kpis{grid-template-columns:repeat(2,1fr)}.kpis .kpi:first-child{grid-column:1/-1}
+  .grid{grid-template-columns:1fr}.grid>.card{margin-bottom:18px}.gridwrap{margin-bottom:0}
+  .pv{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .g-row,.g-months{grid-template-columns:96px 1fr}
+  .hide-m{display:none}
+  .tag{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="wordmark" href="https://florensmedia.ro/">Florens Media</a>
+  <span class="tag">Exemplu de raport</span>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Raport post-buy · toate campaniile</div>
+    <h1>Toate campaniile TV ale anului, într-un singur raport</h1>
+    <p class="lede">Fiecare post-buy arată o campanie. Raportul le pune împreună: cum a livrat fiecare față de plan, ce a influențat rezultatele și ce se repetă de la o campanie la alta. Alegi o campanie din calendar sau din tabel și vezi detaliile ei.</p>
+    <div class="band">Brandurile, campaniile și cifrele sunt ilustrative și nu aparțin unui client real.</div>
+  </section>
+
+  <div class="controls">
+    <div class="chips" id="cats" aria-label="Categorie"></div>
+  </div>
+
+  <h2 class="sec">Imaginea de ansamblu</h2>
+  <p class="sec-sub" id="ovSub"></p>
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <h2>Calendarul campaniilor</h2>
+    <p class="sub">Perioada de difuzare și livrarea TRP față de plan</p>
+    <div class="legend">
+      <span><i style="background:var(--teal)"></i>în parametri (±5%)</span>
+      <span><i style="background:var(--warn)"></i>sub plan cu 5–10%</span>
+      <span><i style="background:var(--accent)"></i>sub plan cu peste 10%</span>
+    </div>
+    <div class="g-months"><div></div><div><span>ian</span><span>feb</span><span>mar</span><span>apr</span><span>mai</span><span>iun</span><span>iul</span><span>aug</span><span>sep</span><span>oct</span></div></div>
+    <div class="gantt" id="gantt"></div>
+  </section>
+
+  <div class="gridwrap"><section class="grid">
+    <div class="card">
+      <h2>Livrarea față de plan</h2>
+      <p class="sub">Abaterea TRP și a bugetului, pe fiecare campanie</p>
+      <div class="legend">
+        <span><i style="background:var(--teal)"></i>TRP</span>
+        <span><i style="background:var(--low)"></i>buget</span>
+      </div>
+      <div id="devChart"></div>
+      <div class="fn">Când TRP scad mai mult decât bugetul, costul pe punct de rating a crescut față de plan.</div>
+    </div>
+    <div class="card">
+      <h2>Ce a influențat livrarea</h2>
+      <p class="sub">Cauza principală notată în fiecare post-buy</p>
+      <div class="legend">
+        <span><i style="background:var(--teal)"></i>livrare conform planului</span>
+        <span><i style="background:var(--accent)"></i>cauză a abaterii</span>
+      </div>
+      <div class="causes" id="causes"></div>
+      <div class="fn">Numărul de campanii la care factorul a fost principalul motiv al abaterii.</div>
+    </div>
+  </section></div>
+
+  <section class="card">
+    <h2>Toate campaniile</h2>
+    <p class="sub">Atinge un rând pentru detaliile campaniei</p>
+    <div style="overflow-x:auto">
+    <table class="tbl" id="tbl"></table>
+    </div>
+  </section>
+
+  <section class="concl">
+    <h2>Ce se repetă de la o campanie la alta</h2>
+    <ul id="lessons"></ul>
+  </section>
+
+  <div class="detail-head" id="detail">
+    <div>
+      <div class="kicker" id="dCat"></div>
+      <h2 id="dName"></h2>
+      <div class="meta" id="dMeta"></div>
+    </div>
+    <div class="nav-btns"><button id="prev" aria-label="Campania anterioară">← Anterioara</button><button id="next" aria-label="Campania următoare">Următoarea →</button></div>
+  </div>
+  <section class="pv" id="pv"></section>
+
+  <div class="gridwrap"><section class="grid">
+    <div class="card">
+      <h2>TRP pe săptămâni</h2>
+      <p class="sub">Plan și realizat pe targetul de cumpărare</p>
+      <div class="legend">
+        <span><i style="background:var(--low)"></i>plan</span>
+        <span><i style="background:var(--teal)"></i>realizat</span>
+        <span><i style="background:var(--accent)"></i>realizat cu peste 10% sub plan</span>
+      </div>
+      <div id="wkChart"></div>
+    </div>
+    <div class="card">
+      <h2>Mixul de stații</h2>
+      <p class="sub">Ponderea fiecărei stații în TRP</p>
+      <div class="legend">
+        <span><i style="background:var(--teal)"></i>realizat</span>
+        <span><i style="background:var(--ink);width:3px"></i>plan</span>
+      </div>
+      <div class="split" id="split"></div>
+      <h2 style="margin-top:22px">Poziționări premium</h2>
+      <p class="sub">Ponderea în TRP a spoturilor difuzate primele sau ultimele în pauză</p>
+      <div class="legend">
+        <span><i style="background:var(--low)"></i>plan</span>
+        <span><i style="background:var(--teal)"></i>realizat</span>
+      </div>
+      <div class="split" id="prem"></div>
+      <div class="fn">Stațiile sunt anonimizate. În raportul real apar numele lor.</div>
+    </div>
+  </section></div>
+
+  <section class="concl">
+    <h2>Concluziile campaniei</h2>
+    <ul id="dConcl"></ul>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h3>Vrei un astfel de raport pentru campaniile tale?</h3>
+      <p>Pornesc de la post-buy-urile pe care le primești deja de la agenție și le reunesc într-un raport pe care îl poți deschide oricând, de pe orice dispozitiv, ca să vezi ce a funcționat și ce merită schimbat la planificarea următoare.</p>
+    </div>
+    <a class="btn" href="https://florensmedia.ro/#contact">Hai să discutăm</a>
+  </section>
+</main>
+
+<footer><div class="in">
+  <span>© 2026 Florens Media Strategy S.R.L. · <a href="https://florensmedia.ro/">florensmedia.ro</a></span>
+  <span>Exemplu de raport</span>
+</div></footer>
+
+<script>
+(function(){
+// [nume, categorie, start, end, buget plan €, devBuget %, TRP plan, devTRP %, afinitate pp, R1 plan, R1 real, R3 plan, R3 real, PT plan, PT real, cauză, concluzii]
+const RAW=[
+ ['Aurora Cafea','Cafea','2026-01-12','2026-02-08',62000,-1.4,620,-2.1,1.2,72,73.1,52,52.6,50,49.2,'În plan',
+  ['Campania a fost difuzată conform planului.','Afinitatea a crescut ușor (+1,2 pp), iar reach-ul 1+ a depășit planul cu 1,1 pp.','Ponderea prime time a rămas aproape de plan.']],
+ ['Fructa Nectar','Băuturi','2026-03-02','2026-04-05',98000,-3.0,880,-6.8,-4.6,78,75.6,60,56.8,48,46.5,'Scădere de afinitate',
+  ['Afinitatea pe targetul brandului a scăzut cu 4,6 pp, mai ales pe stațiile de nișă.','TRP au rămas sub plan, iar reach-ul 3+ a pierdut 3,2 pp.','Pentru valul următor: o pondere mai mare pe stațiile mari, cu audiență mai stabilă pe target.']],
+ ['Vârf Apă Minerală','Apă','2026-03-20','2026-04-26',84000,-0.6,790,1.5,2.1,76,77.2,57,58.4,50,51.3,'În plan',
+  ['Campania a livrat peste plan la TRP, cu un buget ușor sub plan.','Afinitatea a crescut cu 2,1 pp, ceea ce a adus reach mai mare pe ambele niveluri.']],
+ ['Crocant','Snacks','2026-04-10','2026-05-17',71000,-5.1,700,-11.2,-1.0,74,69.8,55,49.9,47,44.0,'Probleme de difuzare',
+  ['În ultima săptămână, o parte din spoturi nu au fost difuzate pe una dintre stații.','Recuperarea nu a fost posibilă în perioada campaniei, iar TRP au rămas cu 11,2% sub plan.','Reach-ul 1+ a fost cu 4,2 pp sub plan.']],
+ ['Lactis Iaurt','Lactate','2026-05-04','2026-06-07',76000,-1.9,720,-3.4,-2.2,73,72.1,54,52.0,49,48.4,'În plan',
+  ['Campania a fost livrată aproape de plan.','Scăderea de afinitate (-2,2 pp) a fost compensată prin ajustări de mix.']],
+ ['Fructa Ice Tea','Băuturi','2026-06-08','2026-07-19',112000,1.2,1050,-8.1,-3.0,80,77.4,62,58.9,50,47.1,'Competiții sportive',
+  ['Campania s-a suprapus cu Campionatul Mondial de fotbal; o mare parte din advertiseri și-au mutat bugetele pe meciuri.','Prețurile mai mari și audiențele mai mici în afara meciurilor au dus TRP sub plan, la un buget ușor peste.','Campania a fost prelungită cu 4 zile.']],
+ ['Vârf Apă Minerală','Apă','2026-07-01','2026-08-09',88000,-0.8,820,-4.2,-1.6,76,75.2,57,55.1,48,47.2,'Competiții sportive',
+  ['Prima săptămână s-a suprapus cu finalul Campionatului Mondial.','Restul campaniei s-a desfășurat conform planului, iar livrarea finală a rămas în parametri.']],
+ ['Crocant','Snacks','2026-08-18','2026-09-20',69000,0.4,680,3.4,3.0,73,74.6,54,56.2,47,48.8,'În plan',
+  ['Afinitatea a crescut cu 3 pp față de plan.','TRP și reach au depășit planul, la același buget.']],
+ ['Aurora Cafea','Cafea','2026-09-01','2026-10-04',64000,-0.9,640,-0.8,0.4,72,72.4,52,52.3,50,50.6,'În plan',
+  ['Campania a fost livrată conform planului, pe toți indicatorii.']],
+ ['Lactis Iaurt','Lactate','2026-09-14','2026-10-18',74000,-2.5,700,-5.6,-4.1,73,71.0,54,51.2,49,47.8,'Scădere de afinitate',
+  ['Afinitatea a scăzut cu 4,1 pp, cu variații mari de la o zi la alta pe aceleași programe.','TRP au rămas cu 5,6% sub plan, iar reach-ul 3+ cu 2,8 pp sub plan.','Este a doua campanie Lactis cu scădere de afinitate: merită revăzut mixul de stații pentru acest target.']],
+ ['Verdana Detergent','Îngrijirea casei','2026-09-22','2026-10-25',90000,-0.3,860,-1.2,0.6,75,75.8,56,56.4,48,48.9,'În plan',
+  ['Campania a fost livrată conform planului.','Reach-ul 1+ a depășit planul cu 0,8 pp.']],
+ ['Fructa Nectar','Băuturi','2026-09-28','2026-10-25',95000,-1.1,870,-2.6,-0.9,78,77.5,60,59.1,48,48.3,'În plan',
+  ['Campania a fost livrată aproape de plan.','Mixul ajustat după primul val (mai mult pe stațiile mari) a menținut afinitatea stabilă.']]
+];
+const PREM=[[20,21.5],[22,18.4],[20,20.8],[18,12.6],[20,19.1],[25,19.8],[20,18.9],[18,19.7],[20,20.4],[20,17.2],[22,22.6],[22,21.8]];
+const C=RAW.map((r,i)=>({i,name:r[0],cat:r[1],start:new Date(r[2]),end:new Date(r[3]),bp:r[4],bd:r[5],tp:r[6],td:r[7],aff:r[8],r1p:r[9],r1:r[10],r3p:r[11],r3:r[12],ptp:r[13],pt:r[14],cause:r[15],concl:r[16],pp:PREM[i][0],pr:PREM[i][1]}));
+// generator determinist
+function rng(seed){let s=seed*9301+49297;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+C.forEach(c=>{
+  const R=rng(c.i+3),wk=Math.ceil((c.end-c.start)/864e5/7);
+  const prof=Array.from({length:wk},(_,k)=>1.25-0.45*k/Math.max(1,wk-1));
+  const sp=prof.reduce((a,b)=>a+b,0);
+  c.wp=prof.map(v=>c.tp*v/sp);
+  const raw=c.wp.map((v,k)=>v*(1+(R()-0.5)*0.12+(c.cause==='Probleme de difuzare'&&k===wk-1?-0.45:0)));
+  const tr=c.tp*(1+c.td/100),sr=raw.reduce((a,b)=>a+b,0);
+  c.wr=raw.map(v=>v*tr/sr);
+  const base=[34,26,13,9],plan=base.map(v=>v+(R()-0.5)*4);plan.push(100-plan.reduce((a,b)=>a+b,0));
+  c.sp=plan;c.sr=plan.map((v,k)=>v+(k<2?(c.aff<-2?-1:1)*(R()*2):(R()-0.5)*2));
+  const ss=c.sr.reduce((a,b)=>a+b,0);c.sr=c.sr.map(v=>v*100/ss);
+  c.status=c.td>=-5?'ok':(c.td>=-10?'lo':'bad');
+});
+const fmt=(x,d=0)=>x.toLocaleString('ro-RO',{minimumFractionDigits:d,maximumFractionDigits:d});
+const sg=(x,d=1)=>(x>0?'+':x<0?'−':'')+fmt(Math.abs(x),d);
+const MON=['ian','feb','mar','apr','mai','iun','iul','aug','sep','oct','nov','dec'];
+const dshort=d=>d.getDate()+' '+MON[d.getMonth()];
+const STC={ok:'var(--teal)',lo:'var(--warn)',bad:'var(--accent)'};
+const STL={ok:'în parametri',lo:'sub plan',bad:'mult sub plan'};
+let cat='Toate',sel=0;
+
+const cats=['Toate',...new Set(C.map(c=>c.cat))];
+const catEl=document.getElementById('cats');
+cats.forEach(k=>{const b=document.createElement('button');b.className='chip';b.textContent=k;b.dataset.k=k;b.onclick=()=>{cat=k;const v=list();if(!v.includes(C[sel]))sel=v[0].i;renderAll();};catEl.appendChild(b);});
+const list=()=>C.filter(c=>cat==='Toate'||c.cat===cat);
+
+function overview(){
+  const v=list(),bp=v.reduce((a,c)=>a+c.bp,0),br=v.reduce((a,c)=>a+c.bp*(1+c.bd/100),0);
+  const tp=v.reduce((a,c)=>a+c.tp,0),tr=v.reduce((a,c)=>a+c.tp*(1+c.td/100),0);
+  const r1=v.reduce((a,c)=>a+(c.r1-c.r1p),0)/v.length,ok=v.filter(c=>c.status==='ok').length;
+  const cpp=(br/tr)/(bp/tp)-1;
+  document.getElementById('ovSub').textContent=(cat==='Toate'?'Toate categoriile':cat)+' · ianuarie–octombrie 2026 · reach pe target 25–55 național';
+  document.getElementById('kpis').innerHTML=[
+    ['Campanii',v.length,'difuzate în 2026'],
+    ['Buget realizat',fmt(br/1000)+' mii €',sg((br/bp-1)*100)+'% față de plan'],
+    ['TRP realizate',fmt(tr),sg((tr/tp-1)*100)+'% față de plan'],
+    ['Cost pe TRP',sg(cpp*100)+'%','față de plan'],
+    ['În parametri',ok+' din '+v.length,'campanii cu TRP la ±5% de plan']
+  ].map(k=>`<div class="kpi"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[2]}</div></div>`).join('');
+}
+
+function gantt(){
+  const y0=new Date('2026-01-01'),y1=new Date('2026-11-01'),span=y1-y0;
+  document.getElementById('gantt').innerHTML=list().map(c=>{
+    const l=(c.start-y0)/span*100,w=(c.end-c.start)/span*100;
+    return `<div class="g-row${c.i===sel?' sel':''}" data-i="${c.i}"><div class="g-name">${c.name}<small>${dshort(c.start)} – ${dshort(c.end)}</small></div>
+    <div class="g-track"><div class="g-bar" style="left:${l}%;width:${w}%;background:${STC[c.status]}" title="${c.name}: TRP ${sg(c.td)}% față de plan"></div></div></div>`;}).join('');
+  document.querySelectorAll('.g-row').forEach(r=>r.onclick=()=>pick(+r.dataset.i));
+}
+
+function devChart(){
+  const v=list(),W=520,rowH=26,H=v.length*rowH+30,pl=118,pr=20,mx=14;
+  const x=val=>pl+(W-pl-pr)*(val+mx)/(2*mx);
+  let g='';
+  [-10,-5,0,5,10].forEach(t=>{g+=`<line x1="${x(t)}" x2="${x(t)}" y1="0" y2="${H-24}" stroke="${t===0?'var(--muted)':'var(--line)'}" ${t===0?'':'stroke-dasharray="3 3"'}/><text x="${x(t)}" y="${H-8}" text-anchor="middle">${t>0?'+':''}${t}%</text>`;});
+  v.forEach((c,k)=>{
+    const y=k*rowH+4,nm=c.name.length>15?c.name.slice(0,14)+'…':c.name;
+    g+=`<text x="${pl-8}" y="${y+14}" text-anchor="end" style="fill:var(--ink)${c.i===sel?';font-weight:700':''}">${nm} · ${MON[c.start.getMonth()]}</text>`;
+    const b0=x(0),bt=x(Math.max(-mx,Math.min(mx,c.td))),bb=x(c.bd);
+    g+=`<rect x="${Math.min(b0,bb)}" y="${y+3}" width="${Math.abs(bb-b0)}" height="6" rx="2" fill="var(--low)"><title>Buget ${sg(c.bd)}%</title></rect>`;
+    g+=`<rect x="${Math.min(b0,bt)}" y="${y+10}" width="${Math.abs(bt-b0)}" height="9" rx="2" fill="var(--teal)"><title>TRP ${sg(c.td)}%</title></rect>`;
+  });
+  document.getElementById('devChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Abaterea față de plan">${g}</svg>`;
+}
+
+function causes(){
+  const v=list(),cnt={};v.forEach(c=>cnt[c.cause]=(cnt[c.cause]||0)+1);
+  const arr=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('causes').innerHTML=arr.map(([k,n])=>`<div class="c"><div class="t"><span>${k}</span><b>${n}</b></div><div class="b"><span style="width:${n/v.length*100}%;background:${k==='În plan'?'var(--teal)':'var(--accent)'}"></span></div></div>`).join('');
+}
+
+function table(){
+  const v=list();
+  document.getElementById('tbl').innerHTML=`<thead><tr><th>Campanie</th><th class="hide-m">Perioadă</th><th class="n">TRP vs plan</th><th class="n">Reach 1+</th><th class="n hide-m">Reach 3+</th><th class="n hide-m">Prime time</th><th class="n hide-m">Poz. premium</th></tr></thead><tbody>`+
+  v.map(c=>`<tr data-i="${c.i}" class="${c.i===sel?'sel':''}"><td><b>${c.name}</b><br><span style="color:var(--muted);font-size:12px">${c.cat}</span></td>
+   <td class="hide-m">${dshort(c.start)} – ${dshort(c.end)}</td>
+   <td class="n"><span class="pill ${c.status}">${sg(c.td)}%</span></td>
+   <td class="n">${fmt(c.r1,1)}% <span class="${c.r1-c.r1p>=0?'pos':'neg'}" style="font-size:12px">${sg(c.r1-c.r1p)}</span></td>
+   <td class="n hide-m">${fmt(c.r3,1)}% <span class="${c.r3-c.r3p>=0?'pos':'neg'}" style="font-size:12px">${sg(c.r3-c.r3p)}</span></td>
+   <td class="n hide-m">${fmt(c.pt,1)}%</td>
+   <td class="n hide-m">${fmt(c.pr,1)}% <span class="${c.pr-c.pp>=0?'pos':'neg'}" style="font-size:12px">${sg(c.pr-c.pp)}</span></td></tr>`).join('')+'</tbody>';
+  document.querySelectorAll('#tbl tbody tr').forEach(r=>r.onclick=()=>{pick(+r.dataset.i);document.getElementById('detail').scrollIntoView({behavior:'smooth'});});
+}
+
+function lessons(){
+  const v=list(),out=[];
+  const ok=v.filter(c=>c.status==='ok').length;
+  out.push(`${ok} din ${v.length} campanii au livrat TRP în intervalul de ±5% față de plan.`);
+  const aff=v.filter(c=>c.cause==='Scădere de afinitate');
+  if(aff.length)out.push(`Scăderea de afinitate a fost cauza principală la ${aff.length} ${aff.length===1?'campanie':'campanii'} (${[...new Set(aff.map(c=>c.name))].join(', ')}). Targetul brandului are audiențe instabile pe stațiile de nișă, iar mixul merită ajustat încă din plan.`);
+  const sp=v.filter(c=>c.cause==='Competiții sportive');
+  if(sp.length)out.push(`Campaniile difuzate în perioada Campionatului Mondial au avut costuri mai mari pe TRP. Pentru anii cu competiții mari, merită planificat din timp fie o prezență în meciuri, fie o mutare a campaniei în afara perioadei.`);
+  const lowR3=v.filter(c=>c.r3-c.r3p<-2);
+  if(lowR3.length)out.push(`Reach-ul 3+ a fost cu peste 2 pp sub plan la ${lowR3.length} ${lowR3.length===1?'campanie':'campanii'}: când TRP scad, frecvența efectivă e prima care are de suferit.`);
+  const pr=v.reduce((a,c)=>a+(c.pr-c.pp),0)/v.length,prLow=v.filter(c=>c.pr-c.pp<-2);
+  out.push(`Poziționările premium au fost în medie ${sg(pr)} pp față de plan`+(prLow.length?`; cele mai mari diferențe au apărut la ${[...new Set(prLow.map(c=>c.name+' ('+MON[c.start.getMonth()]+')'))].join(', ')}, în perioade aglomerate, când stațiile au ocupat mai greu pozițiile cerute.`:'.'));
+  const pt=v.reduce((a,c)=>a+(c.pt-c.ptp),0)/v.length;
+  out.push(`Ponderea prime time a fost în medie ${sg(pt)} pp față de plan.`);
+  document.getElementById('lessons').innerHTML=out.map(t=>`<li>${t}</li>`).join('');
+}
+
+function detail(){
+  const c=C[sel],v=list(),k=v.indexOf(c);
+  document.getElementById('dCat').textContent=c.cat+' · post-buy';
+  document.getElementById('dName').textContent=c.name;
+  document.getElementById('dMeta').textContent=`${dshort(c.start)} – ${dshort(c.end)} 2026 · ${c.wp.length} săptămâni`;
+  document.getElementById('prev').disabled=k<=0;document.getElementById('next').disabled=k>=v.length-1;
+  const box=(l,val,plan,d,good)=>`<div class="kpi"><div class="l">${l}</div><div class="v">${val}</div><div class="s">plan ${plan}</div><div class="d ${good===null?'neu':good?'pos':'neg'}">${d}</div></div>`;
+  document.getElementById('pv').innerHTML=
+    box('Buget',fmt(c.bp*(1+c.bd/100)/1000,1)+' mii €',fmt(c.bp/1000,1)+' mii €',sg(c.bd)+'%',null)+
+    box('TRP',fmt(c.tp*(1+c.td/100)),fmt(c.tp),sg(c.td)+'%',c.td>=-5)+
+    `<div class="kpi"><div class="l">Afinitate</div><div class="v ${c.aff>=0?'pos':'neg'}">${sg(c.aff)} pp</div><div class="s">față de plan</div></div>`+
+    box('Reach 1+',fmt(c.r1,1)+'%',fmt(c.r1p,1)+'%',sg(c.r1-c.r1p)+' pp',c.r1>=c.r1p)+
+    box('Reach 3+',fmt(c.r3,1)+'%',fmt(c.r3p,1)+'%',sg(c.r3-c.r3p)+' pp',c.r3>=c.r3p)+
+    box('Prime time',fmt(c.pt,1)+'%',fmt(c.ptp,1)+'%',sg(c.pt-c.ptp)+' pp',c.pt>=c.ptp-1);
+  // săptămâni
+  const n=c.wp.length,W=520,H=220,pl=36,pb=24,pt=10,bw=(W-pl)/n,mx=Math.max(...c.wp,...c.wr)*1.15;
+  const y=val=>pt+(H-pt-pb)*(1-val/mx);let g='';
+  for(let t=0;t<=3;t++){const val=mx/1.15/3*t;g+=`<line x1="${pl}" x2="${W}" y1="${y(val)}" y2="${y(val)}" stroke="var(--line)"/><text x="${pl-6}" y="${y(val)+4}" text-anchor="end">${fmt(val)}</text>`;}
+  c.wp.forEach((p,j)=>{const x=pl+j*bw,r=c.wr[j];
+    g+=`<rect x="${x+bw*.12}" y="${y(p)}" width="${bw*.36}" height="${H-pb-y(p)}" rx="2" fill="var(--low)"><title>S${j+1} plan: ${fmt(p)} TRP</title></rect>`;
+    g+=`<rect x="${x+bw*.52}" y="${y(r)}" width="${bw*.36}" height="${H-pb-y(r)}" rx="2" fill="${r<p*0.9?'var(--accent)':'var(--teal)'}"><title>S${j+1} realizat: ${fmt(r)} TRP (${sg((r/p-1)*100)}%)</title></rect>`;
+    g+=`<text x="${x+bw/2}" y="${H-8}" text-anchor="middle">S${j+1}</text>`;});
+  document.getElementById('wkChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="TRP pe săptămâni">${g}</svg>`;
+  const names=['Stația A','Stația B','Stația C','Stația D','Alte stații'];
+  document.getElementById('split').innerHTML=names.map((nm,j)=>`<div class="r"><span>${nm}</span><div class="b"><span style="width:${c.sr[j]/45*100}%"></span><em style="left:${c.sp[j]/45*100}%"></em></div><span class="p">${fmt(c.sr[j])}%</span></div>`).join('');
+  const pm=Math.max(c.pp,c.pr)*1.25;
+  document.getElementById('prem').innerHTML=[['Plan',c.pp,'var(--low)'],['Realizat',c.pr,'var(--teal)']].map(([nm,v,col])=>`<div class="r"><span>${nm}</span><div class="b"><span style="width:${v/pm*100}%;background:${col}"></span></div><span class="p">${fmt(v,1)}%</span></div>`).join('');
+  const extra=c.pr-c.pp<-2?[`Poziționările premium au rămas sub plan (${fmt(c.pr,1)}% față de ${fmt(c.pp,1)}%).`]:c.pr-c.pp>1?[`Poziționările premium au depășit planul (${fmt(c.pr,1)}% față de ${fmt(c.pp,1)}%).`]:[];
+  document.getElementById('dConcl').innerHTML=c.concl.concat(extra).map(t=>`<li>${t}</li>`).join('');
+}
+
+function pick(i){sel=i;renderAll();}
+document.getElementById('prev').onclick=()=>{const v=list(),k=v.indexOf(C[sel]);if(k>0)pick(v[k-1].i);};
+document.getElementById('next').onclick=()=>{const v=list(),k=v.indexOf(C[sel]);if(k<v.length-1)pick(v[k+1].i);};
+function renderAll(){
+  catEl.querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',b.dataset.k===cat));
+  overview();gantt();devChart();causes();table();lessons();detail();
+}
+renderAll();
+})();
+</script>
+</body>
+</html>

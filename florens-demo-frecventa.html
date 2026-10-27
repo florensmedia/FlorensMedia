@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analiză frecvență post-buy</title>
+<meta name="description" content="Florens Media: exemplu de analiză post-buy pe distribuția frecvenței. Cât din presiunea unei campanii TV ajunge la aceiași oameni.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --bg:#f5f2eb;--panel:#ffffff;--ink:#141414;--muted:#6f6d67;--line:#e2dccf;
+  --accent:#8f4f39;--accent-soft:#e8b08c;--teal:#2f6b52;--teal-soft:#b9d3c6;--low:#cfc8ba;
+  --bar-bg:#efe9dd;--top:#141414;--top-ink:#ffffff;--top-muted:#c8c4bb;
+  --shadow:0 14px 34px rgba(20,20,20,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
+  --accent:#d0876a;--accent-soft:#8f4f39;--teal:#6fae90;--teal-soft:#2f5244;--low:#4a463f;
+  --bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}}
+:root[data-theme="dark"]{
+  --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
+  --accent:#d0876a;--accent-soft:#8f4f39;--teal:#6fae90;--teal-soft:#2f5244;--low:#4a463f;
+  --bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:Georgia,"Times New Roman",serif}
+a{color:inherit}
+.top{background:var(--top);color:var(--top-ink)}
+.top .in{max-width:1120px;margin:0 auto;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-size:16px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--top-ink)}
+.tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--top-muted);border:1px solid rgba(255,255,255,.22);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{padding:40px 0 18px}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(28px,5vw,44px);line-height:1.12;margin:10px 0 12px;max-width:820px}
+.lede{color:var(--muted);max-width:720px;margin:0;font-size:16px}
+.demo-band{margin-top:18px;display:inline-block;font-size:12px;color:var(--muted);background:var(--panel);border:1px dashed var(--line);padding:7px 12px;border-radius:6px}
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 12px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;font:inherit;font-size:13px;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.thr{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.thr label{font-size:13px;color:var(--muted)}
+.thr output{font-family:Georgia,serif;font-size:22px;color:var(--accent);min-width:2ch}
+input[type=range]{flex:1;min-width:160px;max-width:360px;accent-color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:Georgia,serif;font-size:28px;line-height:1.15;margin-top:6px}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi.hot .v{color:var(--accent)}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.card h2{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 4px}
+.card .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin:4px 0 8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.fn{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);margin-top:12px;padding-top:9px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--muted);font-size:11px;font-family:inherit}
+.cmp{width:100%;border-collapse:collapse;font-size:13px}
+.cmp td{padding:9px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.cmp tr.sel td{font-weight:600}
+.cmp .nm{width:34%;padding-right:10px}
+.cmp .nm small{display:block;color:var(--muted);font-weight:400;font-size:11.5px}
+.stack{display:flex;height:16px;border-radius:3px;overflow:hidden;background:var(--bar-bg)}
+.stack span{display:block;height:100%}
+.cmp .pc{width:58px;text-align:right;color:var(--accent);font-family:Georgia,serif;font-size:15px}
+.gain{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.gain .box{border:1px solid var(--line);border-radius:10px;padding:14px}
+.gain .box .l{font-size:12px;color:var(--muted)}
+.gain .box .v{font-family:Georgia,serif;font-size:30px;margin-top:4px}
+.gain .box.after .v{color:var(--teal)}
+.delta{margin-top:12px;font-size:14px}
+.delta b{color:var(--teal)}
+.concl{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:20px 22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.concl h2{font-family:Georgia,serif;font-weight:400;font-size:21px;margin:0 0 10px}
+.concl ul{margin:0;padding-left:18px}
+.concl li{margin:6px 0}
+.cta{background:var(--top);color:var(--top-ink);border-radius:12px;padding:30px 24px;margin:26px 0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cta h3{font-family:Georgia,serif;font-weight:400;font-size:24px;margin:0 0 6px}
+.cta p{margin:0;color:var(--top-muted);max-width:620px}
+.cta a.btn{display:inline-block;background:var(--top-ink);color:var(--top);text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:600;white-space:nowrap}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer .in{max-width:1120px;margin:0 auto;padding:18px 16px 30px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.kpis .kpi:first-child{grid-column:1/-1}.grid{grid-template-columns:1fr}}
+@media (max-width:420px){.gain{grid-template-columns:1fr}.cmp .nm{width:40%}.tag{display:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="wordmark" href="https://florensmedia.ro/">Florens Media</a>
+  <span class="tag">Exemplu de analiză</span>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="kicker">Evaluare post-buy · frecvență</div>
+    <h1>Cât din presiunea campaniei ajunge la aceiași oameni</h1>
+    <p class="lede">Pornind de la datele de post-buy, distribuția frecvenței arată câte persoane din target au văzut spotul de prea puține ori, câte sunt în zona utilă și câte au trecut de pragul de la care atenția scade. Analiza se face pe target 25–55 național, pentru cinci campanii TV.</p>
+    <div class="demo-band">Campaniile și cifrele sunt ilustrative și nu aparțin unui client real.</div>
+  </section>
+
+  <div class="controls">
+    <div class="chips" id="chips" role="tablist" aria-label="Campanie"></div>
+    <div class="thr">
+      <label for="thr">Pragul de saturație (expuneri ale aceleiași persoane)</label>
+      <input type="range" id="thr" min="8" max="20" step="1" value="16">
+      <output id="thrOut" for="thr">16</output>
+    </div>
+  </div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Distribuția frecvenței</h2>
+      <p class="sub">Procent din target care a văzut spotul exact de 1, 2, 3… ori</p>
+      <div class="legend">
+        <span><i style="background:var(--low)"></i>1–2 expuneri</span>
+        <span><i style="background:var(--teal)"></i>zona utilă</span>
+        <span><i style="background:var(--accent)"></i>peste prag</span>
+      </div>
+      <div id="distChart"></div>
+      <div class="fn">Ultima bară cumulează toate persoanele expuse de 20 de ori sau mai mult. Zona utilă începe de la 3 expuneri și se oprește la pragul ales.</div>
+    </div>
+    <div class="card">
+      <h2>Curba de acumulare a reach-ului</h2>
+      <p class="sub">Reach pe target 25–55 național, pe măsură ce se acumulează GRP-urile</p>
+      <div class="legend">
+        <span><i style="background:var(--ink)"></i>Reach 1+</span>
+        <span><i style="background:var(--teal)"></i>Reach 3+</span>
+        <span><i style="background:var(--accent)"></i>peste prag</span>
+      </div>
+      <div id="reachChart"></div>
+      <div class="fn" id="reachNote"></div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Acumularea pe săptămâni</h2>
+      <p class="sub">GRP pe săptămână și partea din target care a trecut de prag</p>
+      <div class="legend">
+        <span><i style="background:var(--teal-soft)"></i>GRP săptămânal</span>
+        <span><i style="background:var(--accent)"></i>% target peste prag (cumulat)</span>
+      </div>
+      <div id="weekChart"></div>
+      <div class="fn" id="weekNote"></div>
+    </div>
+    <div class="card">
+      <h2>Ce s-ar fi putut câștiga</h2>
+      <p class="sub">Reach 3+ cu aceleași GRP-uri, dacă presiunea peste prag ar fi mers spre acoperire</p>
+      <div class="gain">
+        <div class="box"><div class="l">Reach 3+ livrat</div><div class="v" id="r3now">–</div></div>
+        <div class="box after"><div class="l">Reach 3+ estimat</div><div class="v" id="r3est">–</div></div>
+      </div>
+      <p class="delta" id="gainTxt"></p>
+      <div class="fn">Estimare orientativă: expunerile de peste prag sunt redistribuite către persoane neatinse, câte 3 expuneri de persoană, în limita a jumătate din targetul neatins (o parte din acesta se uită foarte puțin la TV).</div>
+    </div>
+  </section>
+
+  <section class="card" style="margin-bottom:18px">
+      <h2>Comparația între campanii</h2>
+      <p class="sub">Cum se împart GRP-urile fiecărei campanii, la același prag</p>
+      <div class="legend">
+        <span><i style="background:var(--low)"></i>până la 2 expuneri</span>
+        <span><i style="background:var(--teal)"></i>zona utilă</span>
+        <span><i style="background:var(--accent)"></i>GRP peste prag</span>
+      </div>
+      <table class="cmp" id="cmp"></table>
+      <div class="fn">Procentul din dreapta este ponderea GRP-urilor livrate peste prag în totalul campaniei. Campaniile sunt ordonate de la cea mai echilibrată la cea mai concentrată.</div>
+  </section>
+
+  <section class="concl">
+    <h2 id="conclTitle">Ce arată campania</h2>
+    <ul id="concl"></ul>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h3>Vrei aceeași analiză pe campaniile tale?</h3>
+      <p>Lucrez cu datele de post-buy pe care le ai deja de la agenție și le transform într-o imagine clară despre cum a fost folosit bugetul, înainte de planificarea următoarei campanii.</p>
+    </div>
+    <a class="btn" href="https://florensmedia.ro/#contact">Hai să discutăm</a>
+  </section>
+</main>
+
+<footer><div class="in">
+  <span>© 2026 Florens Media Strategy S.R.L. · <a href="https://florensmedia.ro/">florensmedia.ro</a></span>
+  <span>Exemplu de analiză</span>
+</div></footer>
+
+<script>
+(function(){
+const CAMPS=[
+  {id:'A',name:'Campania A',cat:'Băutură răcoritoare · lansare',dur:'15"',r:0.70,weeks:[300,260,220,190,150,120]},
+  {id:'B',name:'Campania B',cat:'Produs lactat',dur:'20"',r:0.55,weeks:[240,220,200,180,140]},
+  {id:'C',name:'Campania C',cat:'Retail · campanie continuă',dur:'15"',r:0.48,weeks:[140,130,130,120,120,120,120,120,120]},
+  {id:'D',name:'Campania D',cat:'Îngrijire personală',dur:'20"',r:0.62,weeks:[160,140,130,120,110,100]},
+  {id:'E',name:'Campania E',cat:'Snacks · relansare',dur:'15"',r:0.80,weeks:[280,240,200,170]}
+];
+const N=400;
+// distribuție binomial negativă: p[n] = probabilitatea de a vedea spotul exact de n ori
+function dist(grp,r){
+  const m=grp/100,q=m/(r+m),p=new Array(N+1);
+  p[0]=Math.pow(r/(r+m),r);
+  for(let n=1;n<=N;n++)p[n]=p[n-1]*(r+n-1)/n*q;
+  return p;
+}
+function stats(c,T){
+  const grp=c.weeks.reduce((a,b)=>a+b,0),p=dist(grp,c.r);
+  const reach=1-p[0];
+  let over=0,excess=0,low=0,useful=0,r3=0;
+  for(let n=1;n<=N;n++){
+    if(n<=2)low+=n*p[n];else if(n<=T)useful+=n*p[n];else{useful+=T*p[n];excess+=(n-T)*p[n];over+=p[n];}
+    if(n>=3)r3+=p[n];
+  }
+  const tot=low+useful+excess;
+  const add=Math.min(excess/3,0.5*p[0]);
+  // pe săptămâni
+  let cum=0;const wk=c.weeks.map(g=>{cum+=g;const pw=dist(cum,c.r);let o=0;for(let n=T+1;n<=N;n++)o+=pw[n];return{g,over:o};});
+  return{grp,p,reach,freq:(grp/100)/reach,over,excessGrp:excess*100,excessShare:excess/tot,lowShare:low/tot,usefulShare:useful/tot,r3,r3est:r3+add,add,wk};
+}
+const pct=(x,d=0)=>(x*100).toFixed(d).replace('.',',')+'%';
+const num=x=>Math.round(x).toLocaleString('ro-RO');
+let cur='A',T=16;
+
+const chips=document.getElementById('chips');
+CAMPS.forEach(c=>{
+  const b=document.createElement('button');b.className='chip';b.textContent=c.name+' · '+c.cat.split(' · ')[0];
+  b.setAttribute('role','tab');b.onclick=()=>{cur=c.id;render();};b.dataset.id=c.id;chips.appendChild(b);
+});
+const thr=document.getElementById('thr'),thrOut=document.getElementById('thrOut');
+thr.oninput=()=>{T=+thr.value;thrOut.textContent=T;render();};
+
+function kpis(c,s){
+  document.getElementById('kpis').innerHTML=[
+    ['GRP livrate',num(s.grp),c.weeks.length+' săptămâni · spot '+c.dur],
+    ['Reach 1+',pct(s.reach),'din target 25–55 național'],
+    ['Frecvență medie',s.freq.toFixed(1).replace('.',','),'expuneri pe persoană atinsă'],
+    ['Target peste prag',pct(s.over),'au văzut spotul de peste '+T+' ori',true],
+    ['GRP peste prag',num(s.excessGrp),pct(s.excessShare)+' din totalul campaniei',true]
+  ].map(k=>`<div class="kpi${k[3]?' hot':''}"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="s">${k[2]}</div></div>`).join('');
+}
+
+function distChart(s){
+  const vals=[];for(let n=1;n<=19;n++)vals.push(s.p[n]);
+  let t=0;for(let n=20;n<=N;n++)t+=s.p[n];vals.push(t);
+  const W=560,H=230,pl=30,pb=24,pt=10,bw=(W-pl)/20,mx=Math.max(...vals)*1.12;
+  const y=v=>pt+(H-pt-pb)*(1-v/mx);
+  let g='';
+  for(let i=0;i<=3;i++){const v=mx/3*i,yy=y(v);g+=`<line x1="${pl}" x2="${W}" y1="${yy}" y2="${yy}" stroke="var(--line)"/><text x="${pl-6}" y="${yy+4}" text-anchor="end">${(v*100).toFixed(0)}%</text>`;}
+  vals.forEach((v,i)=>{
+    const n=i+1,col=n<=2?'var(--low)':(n<=T?'var(--teal)':'var(--accent)');
+    const x=pl+i*bw+2,h=H-pb-y(v);
+    g+=`<rect x="${x}" y="${y(v)}" width="${bw-4}" height="${h}" rx="2" fill="${col}"><title>${n===20?'20+':n} expuneri: ${pct(v,1)} din target</title></rect>`;
+    if(n%2===1||n===20)g+=`<text x="${x+(bw-4)/2}" y="${H-8}" text-anchor="middle">${n===20?'20+':n}</text>`;
+  });
+  if(T<20){const xt=pl+T*bw;g+=`<line x1="${xt}" x2="${xt}" y1="${pt}" y2="${H-pb}" stroke="var(--accent)" stroke-dasharray="4 3"/><text x="${xt+4}" y="${pt+10}" style="fill:var(--accent)">prag ${T}</text>`;}
+  document.getElementById('distChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Distribuția frecvenței">${g}</svg>`;
+}
+
+function weekChart(c,s){
+  const W=460,H=230,pl=34,pr=34,pb=24,pt=12,n=s.wk.length,bw=(W-pl-pr)/n;
+  const mg=Math.max(...s.wk.map(w=>w.g))*1.15,mo=Math.max(0.05,...s.wk.map(w=>w.over))*1.2;
+  const yg=v=>pt+(H-pt-pb)*(1-v/mg),yo=v=>pt+(H-pt-pb)*(1-v/mo);
+  let g=`<line x1="${pl}" x2="${W-pr}" y1="${H-pb}" y2="${H-pb}" stroke="var(--line)"/>`;
+  g+=`<text x="${pl-6}" y="${yg(mg/1.15)+4}" text-anchor="end">${num(mg/1.15)}</text>`;
+  let path='';
+  s.wk.forEach((w,i)=>{
+    const x=pl+i*bw;
+    g+=`<rect x="${x+bw*0.18}" y="${yg(w.g)}" width="${bw*0.64}" height="${H-pb-yg(w.g)}" rx="2" fill="var(--teal-soft)"><title>S${i+1}: ${num(w.g)} GRP</title></rect>`;
+    g+=`<text x="${x+bw/2}" y="${H-8}" text-anchor="middle">S${i+1}</text>`;
+    path+=(i?'L':'M')+(x+bw/2)+' '+yo(w.over);
+  });
+  g+=`<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>`;
+  s.wk.forEach((w,i)=>{const x=pl+i*bw+bw/2;g+=`<circle cx="${x}" cy="${yo(w.over)}" r="4" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"><title>S${i+1}: ${pct(w.over,1)} din target peste prag</title></circle>`;});
+  const last=s.wk[n-1];g+=`<text x="${pl+(n-1)*bw+bw/2}" y="${yo(last.over)-10}" text-anchor="middle" style="fill:var(--accent);font-weight:600">${pct(last.over)}</text>`;
+  document.getElementById('weekChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Acumularea pe săptămâni">${g}</svg>`;
+  const i10=s.wk.findIndex(w=>w.over>=0.10);
+  document.getElementById('weekNote').textContent=i10<0
+    ?`Pe toată durata campaniei, sub 10% din target a trecut de pragul de ${T} expuneri.`
+    :`Din săptămâna ${i10+1}, peste 10% din target a trecut de pragul de ${T} expuneri. GRP-urile difuzate de aici încolo ajung tot mai des la aceleași persoane.`;
+  return i10;
+}
+
+function reachChart(c,s){
+  const W=560,H=240,pl=34,pr=44,pb=26,pt=12,G=s.grp,step=10,pts=[];
+  for(let g=0;g<=G;g+=step){const d=dist(g,c.r);let r3=0,o=0;for(let n=3;n<=N;n++)r3+=d[n];for(let n=T+1;n<=N;n++)o+=d[n];pts.push({g,r1:1-d[0],r3,o});}
+  const xg=g=>pl+(W-pl-pr)*g/G,yr=v=>pt+(H-pt-pb)*(1-v);
+  let g='';
+  [0,.25,.5,.75,1].forEach(v=>{g+=`<line x1="${pl}" x2="${W-pr}" y1="${yr(v)}" y2="${yr(v)}" stroke="var(--line)"/><text x="${pl-6}" y="${yr(v)+4}" text-anchor="end">${v*100}%</text>`;});
+  const tick=G>1000?250:200;for(let t=0;t<=G;t+=tick)g+=`<text x="${xg(t)}" y="${H-8}" text-anchor="middle">${num(t)}</text>`;
+  g+=`<text x="${W-pr}" y="${H-8}" text-anchor="end" style="font-size:10px">GRP</text>`;
+  [['r1','var(--ink)'],['r3','var(--teal)'],['o','var(--accent)']].forEach(([k,col])=>{
+    g+=`<path d="${pts.map((p,i)=>(i?'L':'M')+xg(p.g).toFixed(1)+' '+yr(p[k]).toFixed(1)).join('')}" fill="none" stroke="${col}" stroke-width="2.5"/>`;
+    const L=pts[pts.length-1];g+=`<text x="${xg(L.g)+6}" y="${yr(L[k])+4}" style="fill:${col};font-weight:600">${pct(L[k])}</text>`;
+  });
+  let cum=0;c.weeks.forEach((w,i)=>{cum+=w;const d=dist(cum,c.r),r1=1-d[0];g+=`<circle cx="${xg(cum)}" cy="${yr(r1)}" r="3.5" fill="var(--panel)" stroke="var(--ink)" stroke-width="1.5"><title>Final S${i+1}: ${num(cum)} GRP, reach 1+ ${pct(r1,1)}</title></circle>`;});
+  document.getElementById('reachChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Curba de reach">${g}</svg>`;
+  const n=c.weeks.length,lastG=c.weeks[n-1]+c.weeks[n-2],before=dist(G-lastG,c.r)[0],end=dist(G,c.r)[0];
+  document.getElementById('reachNote').textContent=`Punctele marchează finalul fiecărei săptămâni. În ultimele două săptămâni, ${num(lastG)} GRP au adus +${((before-end)*100).toFixed(1).replace('.',',')} pp reach 1+, în timp ce partea din target peste prag a continuat să crească.`;
+}
+function cmp(all){
+  const rows=CAMPS.map(c=>({c,s:all[c.id]})).sort((a,b)=>a.s.excessShare-b.s.excessShare);
+  document.getElementById('cmp').innerHTML=rows.map(({c,s})=>`<tr class="${c.id===cur?'sel':''}">
+    <td class="nm">${c.name}<small>${num(s.grp)} GRP · ${c.cat}</small></td>
+    <td><div class="stack" title="${c.name}">
+      <span style="width:${s.lowShare*100}%;background:var(--low)"></span>
+      <span style="width:${s.usefulShare*100}%;background:var(--teal)"></span>
+      <span style="width:${s.excessShare*100}%;background:var(--accent)"></span></div></td>
+    <td class="pc">${pct(s.excessShare)}</td></tr>`).join('');
+  return rows;
+}
+
+function render(){
+  const c=CAMPS.find(x=>x.id===cur),all={};
+  CAMPS.forEach(x=>all[x.id]=stats(x,T));
+  const s=all[cur];
+  chips.querySelectorAll('.chip').forEach(b=>{const on=b.dataset.id===cur;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
+  kpis(c,s);distChart(s);reachChart(c,s);const i10=weekChart(c,s);const rows=cmp(all);
+  document.getElementById('r3now').textContent=pct(s.r3);
+  document.getElementById('r3est').textContent=pct(s.r3est);
+  document.getElementById('gainTxt').innerHTML=`Cu aceleași ${num(s.grp)} GRP, reach-ul 3+ ar putea crește cu până la <b>${(s.add*100).toFixed(1).replace('.',',')} puncte procentuale</b>, adică aproximativ <b>${pct(s.add/s.r3)}</b> mai mulți oameni care văd spotul de cel puțin 3 ori.`;
+  const best=rows[0].c,worst=rows[rows.length-1].c;
+  const li=[
+    `${pct(s.over)} din target a văzut spotul de peste ${T} ori, iar ${pct(s.excessShare)} din GRP-uri (circa ${num(s.excessGrp)} GRP) au mers către aceste persoane.`,
+    i10<0?`Presiunea s-a acumulat lent: nici în ultima săptămână nu s-a ajuns la 10% din target peste prag.`
+         :`Saturația începe din săptămâna ${i10+1} din ${c.weeks.length}. Pentru săptămânile următoare, o execuție creativă nouă sau o redistribuire a GRP-urilor pe o perioadă mai lungă ar menține atenția.`,
+    `${pct(1-s.reach)} din target nu a văzut deloc spotul. O parte din presiunea în exces, mutată pe canale sau programe cu profil diferit, ar putea aduce până la +${(s.add*100).toFixed(1).replace('.',',')} pp reach 3+.`,
+    cur===worst.id?`Dintre cele cinci campanii, ${c.name} concentrează cel mai mult presiunea pe aceleași persoane.`
+      :cur===best.id?`Dintre cele cinci campanii, ${c.name} are cea mai echilibrată distribuție a presiunii.`
+      :`Cea mai echilibrată campanie la acest prag este ${best.name}, iar cea mai concentrată este ${worst.name}.`
+  ];
+  document.getElementById('conclTitle').textContent='Ce arată '+c.name;
+  document.getElementById('concl').innerHTML=li.map(t=>`<li>${t}</li>`).join('');
+}
+render();
+})();
+</script>
+</body>
+</html>
