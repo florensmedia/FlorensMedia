@@ -9,17 +9,17 @@
 <style>
 :root{
   --bg:#f5f2eb;--panel:#ffffff;--ink:#141414;--muted:#6f6d67;--line:#e2dccf;
-  --accent:#8f4f39;--accent-soft:#f1dccf;--teal:#2f6b52;--teal-soft:#d6e6dd;--warn:#b8742c;--warn-soft:#f6e3c8;
+  --accent:#8f4f39;--accent-soft:#f1dccf;--teal:#2f6b52;--teal-soft:#d6e6dd;--up:#3c6488;--up-soft:#dbe5ee;--warn:#b8742c;--warn-soft:#f6e3c8;
   --low:#cfc8ba;--bar-bg:#efe9dd;--top:#141414;--top-ink:#ffffff;--top-muted:#c8c4bb;
   --shadow:0 14px 34px rgba(20,20,20,.06);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
-  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--warn:#dba05e;--warn-soft:#3a2d1c;
+  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--up:#86a9c9;--up-soft:#1f2b36;--warn:#dba05e;--warn-soft:#3a2d1c;
   --low:#4a463f;--bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}}
 :root[data-theme="dark"]{
   --bg:#141414;--panel:#1d1c1a;--ink:#f1ede5;--muted:#a8a399;--line:#33302b;
-  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--warn:#dba05e;--warn-soft:#3a2d1c;
+  --accent:#d0876a;--accent-soft:#3a271f;--teal:#6fae90;--teal-soft:#22352c;--up:#86a9c9;--up-soft:#1f2b36;--warn:#dba05e;--warn-soft:#3a2d1c;
   --low:#4a463f;--bar-bg:#26241f;--top:#0c0c0c;--top-ink:#f1ede5;--top-muted:#a8a399;--shadow:none}
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -102,6 +102,7 @@ svg text{fill:var(--muted);font-size:11px;font-family:inherit}
 .tbl .n{text-align:right;white-space:nowrap}
 .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
 .ok{background:var(--teal-soft);color:var(--teal)}
+.up{background:var(--up-soft);color:var(--up)}
 .lo{background:var(--warn-soft);color:var(--warn)}
 .bad{background:var(--accent-soft);color:var(--accent)}
 .hide-m{}
@@ -167,6 +168,7 @@ footer .in{max-width:1120px;margin:0 auto;padding:18px 16px 30px;display:flex;ju
     <h2>Calendarul campaniilor</h2>
     <p class="sub">Perioada de difuzare și livrarea TRP față de plan</p>
     <div class="legend">
+      <span><i style="background:var(--up)"></i>peste plan cu peste 5%</span>
       <span><i style="background:var(--teal)"></i>în parametri (±5%)</span>
       <span><i style="background:var(--warn)"></i>sub plan cu 5–10%</span>
       <span><i style="background:var(--accent)"></i>sub plan cu peste 10%</span>
@@ -191,7 +193,8 @@ footer .in{max-width:1120px;margin:0 auto;padding:18px 16px 30px;display:flex;ju
       <p class="sub">Cauza principală notată în fiecare post-buy</p>
       <div class="legend">
         <span><i style="background:var(--teal)"></i>livrare conform planului</span>
-        <span><i style="background:var(--accent)"></i>cauză a abaterii</span>
+        <span><i style="background:var(--up)"></i>cauză a livrării peste plan</span>
+        <span><i style="background:var(--accent)"></i>cauză a livrării sub plan</span>
       </div>
       <div class="causes" id="causes"></div>
       <div class="fn">Numărul de campanii la care factorul a fost principalul motiv al abaterii.</div>
@@ -296,8 +299,8 @@ const RAW=[
   ['Campania a fost difuzată conform planului.','Afinitatea a crescut ușor (+1,2 pp), iar reach-ul 1+ a depășit planul cu 1,1 pp.','Ponderea prime time a rămas aproape de plan.']],
  ['Fructa Nectar','Băuturi','2026-03-02','2026-04-05',98000,-3.0,880,-6.8,-4.6,78,75.6,60,56.8,48,46.5,'Scădere de afinitate',
   ['Afinitatea pe targetul brandului a scăzut cu 4,6 pp, mai ales pe stațiile de nișă.','TRP au rămas sub plan, iar reach-ul 3+ a pierdut 3,2 pp.','Pentru valul următor: o pondere mai mare pe stațiile mari, cu audiență mai stabilă pe target.']],
- ['Vârf Apă Minerală','Apă','2026-03-20','2026-04-26',84000,-0.6,790,1.5,2.1,76,77.2,57,58.4,50,51.3,'În plan',
-  ['Campania a livrat peste plan la TRP, cu un buget ușor sub plan.','Afinitatea a crescut cu 2,1 pp, ceea ce a adus reach mai mare pe ambele niveluri.']],
+ ['Vârf Apă Minerală','Apă','2026-03-20','2026-04-26',84000,-0.6,790,6.8,3.4,76,78.1,57,59.8,50,51.3,'Afinitate peste plan',
+  ['Campania a livrat cu 6,8% peste plan la TRP, cu un buget ușor sub plan.','Afinitatea a crescut cu 3,4 pp, ceea ce a adus reach mai mare pe ambele niveluri: +2,1 pp la reach 1+ și +2,8 pp la reach 3+.']],
  ['Crocant','Snacks','2026-04-10','2026-05-17',71000,-5.1,700,-11.2,-1.0,74,69.8,55,49.9,47,44.0,'Probleme de difuzare',
   ['În ultima săptămână, o parte din spoturi nu au fost difuzate pe una dintre stații.','Recuperarea nu a fost posibilă în perioada campaniei, iar TRP au rămas cu 11,2% sub plan.','Reach-ul 1+ a fost cu 4,2 pp sub plan.']],
  ['Lactis Iaurt','Lactate','2026-05-04','2026-06-07',76000,-1.9,720,-3.4,-2.2,73,72.1,54,52.0,49,48.4,'În plan',
@@ -306,8 +309,8 @@ const RAW=[
   ['Campania s-a suprapus cu Campionatul Mondial de fotbal; o mare parte din advertiseri și-au mutat bugetele pe meciuri.','Prețurile mai mari și audiențele mai mici în afara meciurilor au dus TRP sub plan, la un buget ușor peste.','Campania a fost prelungită cu 4 zile.']],
  ['Vârf Apă Minerală','Apă','2026-07-01','2026-08-09',88000,-0.8,820,-4.2,-1.6,76,75.2,57,55.1,48,47.2,'Competiții sportive',
   ['Prima săptămână s-a suprapus cu finalul Campionatului Mondial.','Restul campaniei s-a desfășurat conform planului, iar livrarea finală a rămas în parametri.']],
- ['Crocant','Snacks','2026-08-18','2026-09-20',69000,0.4,680,3.4,3.0,73,74.6,54,56.2,47,48.8,'În plan',
-  ['Afinitatea a crescut cu 3 pp față de plan.','TRP și reach au depășit planul, la același buget.']],
+ ['Crocant','Snacks','2026-08-18','2026-09-20',69000,0.4,680,7.6,4.2,73,75.1,54,57.0,47,48.8,'Afinitate peste plan',
+  ['Afinitatea a crescut cu 4,2 pp față de plan.','TRP au depășit planul cu 7,6%, iar reach-ul 3+ cu 3 pp, practic la același buget.']],
  ['Aurora Cafea','Cafea','2026-09-01','2026-10-04',64000,-0.9,640,-0.8,0.4,72,72.4,52,52.3,50,50.6,'În plan',
   ['Campania a fost livrată conform planului, pe toți indicatorii.']],
  ['Lactis Iaurt','Lactate','2026-09-14','2026-10-18',74000,-2.5,700,-5.6,-4.1,73,71.0,54,51.2,49,47.8,'Scădere de afinitate',
@@ -332,14 +335,16 @@ C.forEach(c=>{
   const base=[34,26,13,9],plan=base.map(v=>v+(R()-0.5)*4);plan.push(100-plan.reduce((a,b)=>a+b,0));
   c.sp=plan;c.sr=plan.map((v,k)=>v+(k<2?(c.aff<-2?-1:1)*(R()*2):(R()-0.5)*2));
   const ss=c.sr.reduce((a,b)=>a+b,0);c.sr=c.sr.map(v=>v*100/ss);
-  c.status=c.td>=-5?'ok':(c.td>=-10?'lo':'bad');
+  c.status=c.td>5?'up':c.td>=-5?'ok':(c.td>=-10?'lo':'bad');
 });
 const fmt=(x,d=0)=>x.toLocaleString('ro-RO',{minimumFractionDigits:d,maximumFractionDigits:d});
 const sg=(x,d=1)=>(x>0?'+':x<0?'−':'')+fmt(Math.abs(x),d);
 const MON=['ian','feb','mar','apr','mai','iun','iul','aug','sep','oct','nov','dec'];
+const MONL=['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
+const lst=a=>{const t=[...new Set(a.map(c=>c.name+' în '+MONL[c.start.getMonth()]))];return t.length>1?t.slice(0,-1).join(', ')+' și '+t[t.length-1]:t[0];};
 const dshort=d=>d.getDate()+' '+MON[d.getMonth()];
-const STC={ok:'var(--teal)',lo:'var(--warn)',bad:'var(--accent)'};
-const STL={ok:'în parametri',lo:'sub plan',bad:'mult sub plan'};
+const STC={up:'var(--up)',ok:'var(--teal)',lo:'var(--warn)',bad:'var(--accent)'};
+const STL={up:'peste plan',ok:'în parametri',lo:'sub plan',bad:'mult sub plan'};
 let cat='Toate',sel=0;
 
 const cats=['Toate',...new Set(C.map(c=>c.cat))];
@@ -389,7 +394,7 @@ function devChart(){
 function causes(){
   const v=list(),cnt={};v.forEach(c=>cnt[c.cause]=(cnt[c.cause]||0)+1);
   const arr=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
-  document.getElementById('causes').innerHTML=arr.map(([k,n])=>`<div class="c"><div class="t"><span>${k}</span><b>${n}</b></div><div class="b"><span style="width:${n/v.length*100}%;background:${k==='În plan'?'var(--teal)':'var(--accent)'}"></span></div></div>`).join('');
+  document.getElementById('causes').innerHTML=arr.map(([k,n])=>`<div class="c"><div class="t"><span>${k}</span><b>${n}</b></div><div class="b"><span style="width:${n/v.length*100}%;background:${k==='În plan'?'var(--teal)':k==='Afinitate peste plan'?'var(--up)':'var(--accent)'}"></span></div></div>`).join('');
 }
 
 function table(){
@@ -408,15 +413,16 @@ function table(){
 function lessons(){
   const v=list(),out=[];
   const ok=v.filter(c=>c.status==='ok').length;
-  out.push(`${ok} din ${v.length} campanii au livrat TRP în intervalul de ±5% față de plan.`);
+  const up=v.filter(c=>c.status==='up');
+  out.push(`${ok} din ${v.length} campanii au livrat TRP în intervalul de ±5% față de plan`+(up.length?`, iar ${up.length===1?'una a depășit':up.length+' au depășit'} planul cu peste 5%: ${lst(up)}, datorită unei afinități mai bune decât cea estimată.`:'.'));
   const aff=v.filter(c=>c.cause==='Scădere de afinitate');
-  if(aff.length)out.push(`Scăderea de afinitate a fost cauza principală la ${aff.length} ${aff.length===1?'campanie':'campanii'} (${[...new Set(aff.map(c=>c.name))].join(', ')}). Targetul brandului are audiențe instabile pe stațiile de nișă, iar mixul merită ajustat încă din plan.`);
+  if(aff.length)out.push(`Scăderea de afinitate a fost cauza principală la ${aff.length===1?'o campanie':aff.length+' campanii'}: ${lst(aff)}. ${aff.length===1?'Targetul brandului are':'Targetele acestor branduri au'} audiențe instabile pe stațiile de nișă, iar mixul merită ajustat încă din plan.`);
   const sp=v.filter(c=>c.cause==='Competiții sportive');
   if(sp.length)out.push(`Campaniile difuzate în perioada Campionatului Mondial au avut costuri mai mari pe TRP. Pentru anii cu competiții mari, merită planificat din timp fie o prezență în meciuri, fie o mutare a campaniei în afara perioadei.`);
   const lowR3=v.filter(c=>c.r3-c.r3p<-2);
   if(lowR3.length)out.push(`Reach-ul 3+ a fost cu peste 2 pp sub plan la ${lowR3.length} ${lowR3.length===1?'campanie':'campanii'}: când TRP scad, frecvența efectivă e prima care are de suferit.`);
   const pr=v.reduce((a,c)=>a+(c.pr-c.pp),0)/v.length,prLow=v.filter(c=>c.pr-c.pp<-2);
-  out.push(`Poziționările premium au fost în medie ${sg(pr)} pp față de plan`+(prLow.length?`; cele mai mari diferențe au apărut la ${[...new Set(prLow.map(c=>c.name+' ('+MON[c.start.getMonth()]+')'))].join(', ')}, în perioade aglomerate, când stațiile au ocupat mai greu pozițiile cerute.`:'.'));
+  out.push(`Poziționările premium au fost în medie ${sg(pr)} pp față de plan`+(prLow.length?`; cele mai mari diferențe au apărut la ${lst(prLow)}.`:'.'));
   const pt=v.reduce((a,c)=>a+(c.pt-c.ptp),0)/v.length;
   out.push(`Ponderea prime time a fost în medie ${sg(pt)} pp față de plan.`);
   document.getElementById('lessons').innerHTML=out.map(t=>`<li>${t}</li>`).join('');
